@@ -68,35 +68,10 @@ const ProjectsPage = () => {
     return [...baseProjects, ...extra];
   }, [extra]);
   return (
-    <div className="relative min-h-screen text-[var(--color-white)] overflow-hidden">
-      {/* Enhanced Background Effects */}
+    <div className="relative min-h-screen text-slate-800 overflow-hidden">
+      {/* Subtle background gradient */}
       <div className="absolute inset-0">
-        <div className="absolute top-1/4 left-0 w-96 h-96 bg-[var(--color-electric-blue)] rounded-full mix-blend-screen filter blur-3xl opacity-15 animate-pulse"></div>
-        <div className="absolute top-1/2 right-0 w-96 h-96 bg-[var(--color-violet-glow)] rounded-full mix-blend-screen filter blur-3xl opacity-15 animate-pulse" style={{animationDelay: '2s'}}></div>
-        <div className="absolute bottom-1/3 left-1/3 w-64 h-64 bg-[var(--color-electric-blue)] rounded-full mix-blend-screen filter blur-3xl opacity-10 animate-pulse" style={{animationDelay: '4s'}}></div>
-        
-        {/* Code-themed Floating Elements */}
-        <motion.div 
-          className="absolute top-1/4 right-1/5 text-[var(--color-electric-blue)]/20 text-4xl font-mono"
-          variants={floatingVariants}
-          animate="animate"
-        >
-          {"< />"}
-        </motion.div>
-        <motion.div 
-          className="absolute top-2/3 left-1/6 w-6 h-6 border-2 border-[var(--color-violet-glow)]/30 rounded"
-          variants={floatingVariants}
-          animate="animate"
-          style={{animationDelay: '2s'}}
-        />
-        <motion.div 
-          className="absolute top-1/3 left-1/2 text-[var(--color-electric-blue)]/20 text-2xl"
-          variants={floatingVariants}
-          animate="animate"
-          style={{animationDelay: '3s'}}
-        >
-          {"{ }"}
-        </motion.div>
+        <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_30%_20%,rgba(14,165,233,0.05),transparent_50%),radial-gradient(circle_at_70%_60%,rgba(99,102,241,0.04),transparent_50%)]"></div>
       </div>
 
       <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 py-16">
@@ -108,7 +83,7 @@ const ProjectsPage = () => {
           transition={{ duration: 0.8 }}
         >
           <motion.h1 
-            className="text-5xl md:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white via-[var(--color-electric-blue)] to-[var(--color-violet-glow)]"
+            className="text-5xl md:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-slate-900 via-sky-600 to-indigo-600"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
@@ -116,12 +91,12 @@ const ProjectsPage = () => {
             個人專案
           </motion.h1>
           <motion.p 
-            className="text-xl text-[var(--color-gray-300)] max-w-4xl mx-auto leading-relaxed mb-12"
+            className="text-xl text-slate-600 max-w-4xl mx-auto leading-relaxed mb-12"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
-            以下是我在 <span className="text-[var(--color-electric-blue)] font-semibold">數據科學</span>、<span className="text-[var(--color-violet-glow)] font-semibold">機器學習</span> 和全端開發領域的精選專案。這些專案不僅展示了我的技術實踐能力，也體現了我如何將複雜的數據問題轉化為具有商業價值的解決方案。
+            以下是我在 <span className="text-sky-500 font-semibold">數據科學</span>、<span className="text-indigo-500 font-semibold">機器學習</span> 和全端開發領域的精選專案。這些專案不僅展示了我的技術實踐能力，也體現了我如何將複雜的數據問題轉化為具有商業價值的解決方案。
           </motion.p>
 
           {/* Stats Section */}
@@ -135,12 +110,12 @@ const ProjectsPage = () => {
               <motion.div
                 key={index}
                 variants={itemVariants}
-                className="relative p-6 bg-gradient-to-br from-[var(--color-gray-800)]/60 to-[var(--color-gray-800)]/30 backdrop-blur-lg rounded-2xl border border-[var(--color-gray-700)]/50 text-center group hover:border-[var(--color-electric-blue)]/50 transition-all duration-300"
+                className="relative p-6 bg-white rounded-2xl border border-slate-200 shadow-sm text-center group hover:border-sky-300 hover:shadow-md transition-all duration-300"
                 whileHover={{ y: -5, scale: 1.05 }}
               >
-                <div className="text-[var(--color-electric-blue)] mb-3 flex justify-center">{stat.icon}</div>
-                <div className="text-3xl font-bold text-white mb-1">{stat.value}</div>
-                <div className="text-sm text-[var(--color-gray-400)]">{stat.label}</div>
+                <div className="text-sky-500 mb-3 flex justify-center">{stat.icon}</div>
+                <div className="text-3xl font-bold text-slate-900 mb-1">{stat.value}</div>
+                <div className="text-sm text-slate-500">{stat.label}</div>
               </motion.div>
             ))}
           </motion.div>
@@ -158,7 +133,7 @@ const ProjectsPage = () => {
             <motion.div 
               key={index}
               variants={itemVariants}
-              className="group relative overflow-hidden bg-gradient-to-br from-[var(--color-gray-800)]/90 to-[var(--color-gray-800)]/60 backdrop-blur-xl rounded-3xl border border-[var(--color-gray-700)]/50 transition-all duration-500 hover:border-[var(--color-electric-blue)]/50 hover:shadow-2xl hover:shadow-[var(--color-electric-blue)]/10"
+              className="group relative overflow-hidden bg-white rounded-3xl border border-slate-200 shadow-sm transition-all duration-500 hover:border-sky-300 hover:shadow-lg"
               whileHover={{ y: -8, scale: 1.02 }}
             >
               {/* Dynamic Background Gradient */}
@@ -178,10 +153,10 @@ const ProjectsPage = () => {
                     </motion.div>
                     <div>
                       <div className="flex items-center space-x-2 mb-1">
-                        <span className="text-[var(--color-electric-blue)]">{project.categoryIcon}</span>
-                        <span className="text-sm font-semibold text-[var(--color-electric-blue)]">{project.category}</span>
+                        <span className="text-sky-500">{project.categoryIcon}</span>
+                        <span className="text-sm font-semibold text-sky-500">{project.category}</span>
                       </div>
-                      <h3 className="text-2xl font-bold text-white group-hover:text-[var(--color-electric-blue)] transition-colors duration-300">
+                      <h3 className="text-2xl font-bold text-slate-800 group-hover:text-sky-600 transition-colors duration-300">
                         {project.title}
                       </h3>
                     </div>
@@ -189,7 +164,7 @@ const ProjectsPage = () => {
                 </div>
 
                 {/* Description */}
-                <p className="text-[var(--color-gray-400)] leading-relaxed mb-6 group-hover:text-[var(--color-gray-300)] transition-colors duration-300">
+                <p className="text-slate-500 leading-relaxed mb-6 group-hover:text-slate-600 transition-colors duration-300">
                   {project.description}
                 </p>
 
@@ -198,7 +173,7 @@ const ProjectsPage = () => {
                   {project.technologies.map((tech, i) => (
                     <span 
                       key={i} 
-                      className="px-3 py-1 bg-[var(--color-electric-blue)]/10 border border-[var(--color-electric-blue)]/20 rounded-full text-xs font-medium text-[var(--color-electric-blue)] backdrop-blur-sm"
+                      className="px-3 py-1 bg-sky-500/10 border border-sky-500/20 rounded-full text-xs font-medium text-sky-500 backdrop-blur-sm"
                     >
                       {tech}
                     </span>
@@ -208,9 +183,9 @@ const ProjectsPage = () => {
                 {/* Metrics */}
                 <div className="grid grid-cols-3 gap-4 mb-6">
                   {project.metrics.map((metric, i) => (
-                    <div key={i} className="text-center p-3 bg-[var(--color-gray-900)]/30 rounded-lg border border-[var(--color-gray-600)]/20">
-                      <div className="text-lg font-bold text-white">{metric.value}</div>
-                      <div className="text-xs text-[var(--color-gray-500)]">{metric.label}</div>
+                    <div key={i} className="text-center p-3 bg-slate-50 rounded-lg border border-slate-200">
+                      <div className="text-lg font-bold text-slate-800">{metric.value}</div>
+                      <div className="text-xs text-slate-400">{metric.label}</div>
                     </div>
                   ))}
                 </div>
@@ -219,23 +194,20 @@ const ProjectsPage = () => {
                 <div className="flex space-x-4">
                   <a 
                     href={project.link}
-                    className="group/btn flex-1 flex items-center justify-center space-x-2 py-3 px-6 bg-gradient-to-r from-[var(--color-electric-blue)] to-[var(--color-electric-blue)]/80 text-white font-semibold rounded-xl transition-all duration-300 hover:shadow-lg hover:shadow-[var(--color-electric-blue)]/30"
+                    className="group/btn flex-1 flex items-center justify-center space-x-2 py-3 px-6 bg-sky-500 text-white font-semibold rounded-xl transition-all duration-300 hover:bg-sky-600 hover:shadow-lg"
                   >
                     <FaGithub />
                     <span>查看代碼</span>
                     <FaArrowRight className="group-hover/btn:translate-x-1 transition-transform duration-300" />
                   </a>
-                  <button className="flex items-center justify-center w-12 h-12 bg-[var(--color-gray-700)]/50 hover:bg-[var(--color-violet-glow)]/20 rounded-xl transition-all duration-300 group/eye">
-                    <FaEye className="text-[var(--color-gray-400)] group-hover/eye:text-[var(--color-violet-glow)] transition-colors duration-300" />
+                  <button className="flex items-center justify-center w-12 h-12 bg-slate-100 hover:bg-indigo-50 rounded-xl transition-all duration-300 group/eye">
+                    <FaEye className="text-slate-400 group-hover/eye:text-indigo-500 transition-colors duration-300" />
                   </button>
                 </div>
               </div>
 
               {/* Corner Decoration */}
-              <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-[var(--color-electric-blue)]/10 to-transparent rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              
-              {/* Bottom Glow */}
-              <div className="absolute -bottom-10 left-1/2 transform -translate-x-1/2 w-32 h-10 bg-[var(--color-electric-blue)]/20 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-sky-100 to-transparent rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
             </motion.div>
           ))}
         </motion.div>
@@ -249,10 +221,10 @@ const ProjectsPage = () => {
           transition={{ duration: 0.8 }}
         >
           <div className="max-w-4xl mx-auto">
-            <h3 className="text-4xl font-bold text-white mb-6">
+            <h3 className="text-4xl font-bold text-slate-900 mb-6">
               想要了解更多專案細節？
             </h3>
-            <p className="text-xl text-[var(--color-gray-300)] mb-8 leading-relaxed">
+            <p className="text-xl text-slate-600 mb-8 leading-relaxed">
               每個專案都有其獨特的挑戰與解決方案。我很樂意分享更多技術細節、實作過程，以及從中獲得的寶貴經驗。
             </p>
             
@@ -261,7 +233,7 @@ const ProjectsPage = () => {
                 href="https://github.com/chien-sheng-liu"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex items-center space-x-3 px-8 py-4 bg-gradient-to-r from-[var(--color-electric-blue)] to-[var(--color-violet-glow)] text-white font-bold text-lg rounded-full transition-all duration-300 shadow-2xl shadow-[var(--color-electric-blue)]/30 hover:shadow-[var(--color-electric-blue)]/50"
+                className="group flex items-center space-x-3 px-8 py-4 bg-gradient-to-r from-sky-500 to-indigo-500 text-white font-bold text-lg rounded-full transition-all duration-300 shadow-lg hover:shadow-xl"
                 whileHover={{ scale: 1.05, y: -3 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -275,7 +247,7 @@ const ProjectsPage = () => {
                 </motion.div>
               </motion.a>
               
-              <div className="flex items-center space-x-2 text-[var(--color-gray-400)]">
+              <div className="flex items-center space-x-2 text-slate-500">
                 <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
                 <span className="font-medium">持續更新中</span>
               </div>
@@ -283,23 +255,23 @@ const ProjectsPage = () => {
 
             {/* Bottom Stats */}
             <motion.div 
-              className="mt-16 pt-8 border-t border-[var(--color-gray-700)]/30"
+              className="mt-16 pt-8 border-t border-slate-200"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
               transition={{ delay: 0.5 }}
             >
-              <div className="flex flex-wrap justify-center items-center gap-8 text-sm text-[var(--color-gray-500)]">
+              <div className="flex flex-wrap justify-center items-center gap-8 text-sm text-slate-400">
                 <div className="flex items-center space-x-2">
-                  <FaCode className="text-[var(--color-electric-blue)]" />
+                  <FaCode className="text-sky-500" />
                   <span>100% 開源</span>
                 </div>
                 <div className="flex items-center space-x-2">
-                  <FaStar className="text-[var(--color-violet-glow)]" />
+                  <FaStar className="text-indigo-500" />
                   <span>生產環境驗證</span>
                 </div>
                 <div className="flex items-center space-x-2">
-                  <FaDatabase className="text-[var(--color-electric-blue)]" />
+                  <FaDatabase className="text-sky-500" />
                   <span>完整文檔</span>
                 </div>
               </div>

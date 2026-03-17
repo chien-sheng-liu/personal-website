@@ -59,20 +59,20 @@ function Globe() {
       {/* Core wireframe sphere */}
       <mesh geometry={wireGeo}>
         <meshBasicMaterial
-          color="#22d3ee"
+          color="#0ea5e9"
           wireframe
           transparent
-          opacity={0.06}
+          opacity={0.1}
         />
       </mesh>
 
-      {/* Solid inner glow sphere */}
+      {/* Solid inner sphere */}
       <mesh>
         <sphereGeometry args={[1.78, 32, 24]} />
         <meshBasicMaterial
-          color="#0e1726"
+          color="#f1f5f9"
           transparent
-          opacity={0.5}
+          opacity={0.7}
         />
       </mesh>
 
@@ -88,20 +88,20 @@ function Globe() {
             />
           </bufferGeometry>
           <lineBasicMaterial
-            color={i < 5 ? "#22d3ee" : "#a78bfa"}
+            color={i < 5 ? "#0ea5e9" : "#6366f1"}
             transparent
-            opacity={0.08}
+            opacity={0.1}
           />
         </line>
       ))}
 
-      {/* Glowing outer ring */}
+      {/* Outer ring */}
       <mesh>
         <ringGeometry args={[1.82, 1.88, 64]} />
         <meshBasicMaterial
-          color="#22d3ee"
+          color="#0ea5e9"
           transparent
-          opacity={0.05}
+          opacity={0.08}
           side={THREE.DoubleSide}
         />
       </mesh>

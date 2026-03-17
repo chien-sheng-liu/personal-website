@@ -62,7 +62,7 @@ const Navbar = () => {
 
   return (
     <motion.nav
-      className="fixed top-0 left-0 right-0 z-50 border-b border-white/10 bg-[#020617]/60 backdrop-blur-md"
+      className="fixed top-0 left-0 right-0 z-50 border-b border-slate-200 bg-white/80 backdrop-blur-md shadow-sm"
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.5, ease: 'easeOut' }}
@@ -70,14 +70,14 @@ const Navbar = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <motion.div whileHover={{ scale: 1.05 }}>
-            <Link href={hrefPrefix || '/'} className="text-2xl font-semibold text-white">
+            <Link href={hrefPrefix || '/'} className="text-2xl font-semibold text-slate-900">
               Morris
             </Link>
           </motion.div>
 
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center gap-4">
-            <div className="flex items-center gap-1 rounded-full border border-white/10 bg-white/5 p-1">
+            <div className="flex items-center gap-1 rounded-full border border-slate-200 bg-slate-100 p-1">
               {links.map((link) => {
                 const linkHref = normalize(`${hrefPrefix}${link.href}`.replace('//', '/'));
                 const isActive = normalize(pathname || '') === linkHref;
@@ -86,7 +86,7 @@ const Navbar = () => {
                     key={`${link.name}-${link.href}`}
                     href={linkHref}
                     className={`px-3 py-1.5 rounded-full text-sm font-medium transition-colors ${
-                      isActive ? 'bg-white/10 text-white' : 'text-gray-300 hover:text-white hover:bg-white/5'
+                      isActive ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-600 hover:text-slate-900 hover:bg-white'
                     }`}
                   >
                     {link.name}
@@ -99,17 +99,17 @@ const Navbar = () => {
             <div className="relative">
               <button
                 onClick={() => setShowLang(v => !v)}
-                className="ml-2 px-3 py-1.5 rounded-full text-xs font-semibold border border-white/15 text-gray-300 hover:text-white hover:border-white/30 transition-colors bg-white/5"
+                className="ml-2 px-3 py-1.5 rounded-full text-xs font-semibold border border-slate-200 text-slate-600 hover:text-slate-900 hover:border-slate-300 transition-colors bg-white"
                 aria-haspopup="true"
                 aria-expanded={showLang}
               >
                 {locale === 'en' ? 'EN' : locale === 'yue' ? '粵語' : '繁中'}
               </button>
               {showLang && (
-                <div className="absolute right-0 mt-2 w-28 rounded-lg border border-white/10 bg-[#0b1220]/90 backdrop-blur-xl shadow-lg p-1">
-                  <button onClick={() => switchTo('zh')} className={`w-full text-left px-3 py-2 rounded-md text-xs ${locale==='zh' ? 'bg-white/10 text-white' : 'text-gray-300 hover:bg-white/5 hover:text-white'}`}>繁中</button>
-                  <button onClick={() => switchTo('yue')} className={`w-full text-left px-3 py-2 rounded-md text-xs ${locale==='yue' ? 'bg-white/10 text-white' : 'text-gray-300 hover:bg-white/5 hover:text-white'}`}>粵語</button>
-                  <button onClick={() => switchTo('en')} className={`w-full text-left px-3 py-2 rounded-md text-xs ${locale==='en' ? 'bg-white/10 text-white' : 'text-gray-300 hover:bg-white/5 hover:text-white'}`}>English</button>
+                <div className="absolute right-0 mt-2 w-28 rounded-lg border border-slate-200 bg-white shadow-lg p-1">
+                  <button onClick={() => switchTo('zh')} className={`w-full text-left px-3 py-2 rounded-md text-xs ${locale==='zh' ? 'bg-slate-100 text-slate-900' : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900'}`}>繁中</button>
+                  <button onClick={() => switchTo('yue')} className={`w-full text-left px-3 py-2 rounded-md text-xs ${locale==='yue' ? 'bg-slate-100 text-slate-900' : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900'}`}>粵語</button>
+                  <button onClick={() => switchTo('en')} className={`w-full text-left px-3 py-2 rounded-md text-xs ${locale==='en' ? 'bg-slate-100 text-slate-900' : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900'}`}>English</button>
                 </div>
               )}
             </div>
@@ -120,21 +120,21 @@ const Navbar = () => {
             <div className="relative">
               <button
                 onClick={() => setShowLang(v => !v)}
-                className="px-3 py-1.5 rounded-full text-xs font-semibold border border-white/20 text-gray-300 hover:text-white hover:border-white/40 transition-colors"
+                className="px-3 py-1.5 rounded-full text-xs font-semibold border border-slate-200 text-slate-600 hover:text-slate-900 hover:border-slate-300 transition-colors"
                 aria-haspopup="true"
                 aria-expanded={showLang}
               >
                 {locale === 'en' ? 'EN' : locale === 'yue' ? '粵語' : '繁中'}
               </button>
               {showLang && (
-                <div className="absolute right-0 mt-2 w-28 rounded-lg border border-white/10 bg-black/70 backdrop-blur-xl shadow-lg p-1">
-                  <button onClick={() => switchTo('zh')} className={`w-full text-left px-3 py-2 rounded-md text-xs ${locale==='zh' ? 'bg-white/10 text-white' : 'text-gray-300 hover:bg-white/5 hover:text-white'}`}>繁中</button>
-                  <button onClick={() => switchTo('yue')} className={`w-full text-left px-3 py-2 rounded-md text-xs ${locale==='yue' ? 'bg-white/10 text-white' : 'text-gray-300 hover:bg-white/5 hover:text-white'}`}>粵語</button>
-                  <button onClick={() => switchTo('en')} className={`w-full text-left px-3 py-2 rounded-md text-xs ${locale==='en' ? 'bg-white/10 text-white' : 'text-gray-300 hover:bg-white/5 hover:text-white'}`}>English</button>
+                <div className="absolute right-0 mt-2 w-28 rounded-lg border border-slate-200 bg-white shadow-lg p-1">
+                  <button onClick={() => switchTo('zh')} className={`w-full text-left px-3 py-2 rounded-md text-xs ${locale==='zh' ? 'bg-slate-100 text-slate-900' : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900'}`}>繁中</button>
+                  <button onClick={() => switchTo('yue')} className={`w-full text-left px-3 py-2 rounded-md text-xs ${locale==='yue' ? 'bg-slate-100 text-slate-900' : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900'}`}>粵語</button>
+                  <button onClick={() => switchTo('en')} className={`w-full text-left px-3 py-2 rounded-md text-xs ${locale==='en' ? 'bg-slate-100 text-slate-900' : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900'}`}>English</button>
                 </div>
               )}
             </div>
-            <button onClick={toggleMenu} className="text-white focus:outline-none">
+            <button onClick={toggleMenu} className="text-slate-700 focus:outline-none">
               {isOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
             </button>
           </div>
@@ -144,7 +144,7 @@ const Navbar = () => {
       {/* Mobile Menu */}
       {isOpen && (
         <motion.div
-          className="md:hidden bg-[#020617]/80 backdrop-blur-xl"
+          className="md:hidden bg-white/95 backdrop-blur-xl"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.3 }}
@@ -161,7 +161,7 @@ const Navbar = () => {
                   animate="visible"
                   transition={{ delay: index * 0.1 }}
                 >
-                  <Link href={linkHref} onClick={toggleMenu} className={`block px-3 py-2 rounded-full text-base font-medium border ${active ? 'text-white bg-white/10 border-white/10' : 'text-gray-300 hover:text-white hover:bg-white/5 border-transparent'}`}>
+                  <Link href={linkHref} onClick={toggleMenu} className={`block px-3 py-2 rounded-full text-base font-medium border ${active ? 'text-slate-900 bg-slate-100 border-slate-200' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50 border-transparent'}`}>
                     {link.name}
                   </Link>
                 </motion.div>
@@ -176,7 +176,7 @@ const Navbar = () => {
                 <button
                   key={opt.key}
                   onClick={() => { switchTo(opt.key); toggleMenu(); }}
-                  className={`px-3 py-2 rounded-full text-sm font-semibold border border-white/20 ${locale===opt.key ? 'text-white bg-white/10' : 'text-gray-300 hover:text-white hover:border-white/40'}`}
+                  className={`px-3 py-2 rounded-full text-sm font-semibold border border-slate-200 ${locale===opt.key ? 'text-slate-900 bg-slate-100' : 'text-slate-600 hover:text-slate-900 hover:border-slate-300'}`}
                 >
                   {opt.label}
                 </button>

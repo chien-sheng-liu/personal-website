@@ -58,12 +58,12 @@ export default function FlightArc({ nodes, vbW, vbH }) {
     >
       <defs>
         <linearGradient id="arcGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#22d3ee" stopOpacity="0.8" />
-          <stop offset="100%" stopColor="#a78bfa" stopOpacity="0.8" />
+          <stop offset="0%" stopColor="#0ea5e9" stopOpacity="0.8" />
+          <stop offset="100%" stopColor="#6366f1" stopOpacity="0.8" />
         </linearGradient>
         <linearGradient id="arcGradGlow" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#22d3ee" stopOpacity="0.15" />
-          <stop offset="100%" stopColor="#a78bfa" stopOpacity="0.15" />
+          <stop offset="0%" stopColor="#0ea5e9" stopOpacity="0.1" />
+          <stop offset="100%" stopColor="#6366f1" stopOpacity="0.1" />
         </linearGradient>
         <filter id="dotGlow">
           <feGaussianBlur in="SourceGraphic" stdDeviation="4" />
@@ -109,7 +109,7 @@ export default function FlightArc({ nodes, vbW, vbH }) {
           {/* Glow circle */}
           <circle
             r="8"
-            fill="#22d3ee"
+            fill="#0ea5e9"
             opacity="0.25"
             filter="url(#dotGlow)"
             ref={(el) => {
@@ -120,7 +120,7 @@ export default function FlightArc({ nodes, vbW, vbH }) {
           {/* Bright dot */}
           <circle
             r="2.5"
-            fill="white"
+            fill="#0ea5e9"
             opacity="0.9"
             ref={(el) => {
               if (!dotsRef.current[arc.id]) dotsRef.current[arc.id] = {};

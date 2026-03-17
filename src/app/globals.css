@@ -1,14 +1,8 @@
 @import "tailwindcss";
 
 @theme {
-  --color-deep-space: #0d1117;
-  --color-electric-blue: #00bfff;
-  --color-violet-glow: #8a2be2;
-  --color-gray-300: #d1d5db;
-  --color-gray-400: #9ca3af;
-  --color-gray-700: #374151;
-  --color-gray-800: #1f2937;
-  --color-white: #ffffff;
+  --color-electric-blue: #0ea5e9;
+  --color-violet-glow: #6366f1;
 }
 
 :root {
@@ -17,8 +11,8 @@
 
 @layer base {
   body {
-    background-color: var(--color-deep-space);
-    color: var(--color-gray-300);
+    background-color: #f8fafc;
+    color: #334155;
     font-family: var(--font-body);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -33,12 +27,12 @@
     animation-delay: 4s;
   }
   .bg-grid-pattern {
-    background-image: linear-gradient(to right, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
-                      linear-gradient(to bottom, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.04) 1px, transparent 1px),
+                      linear-gradient(to bottom, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
     background-size: 2rem 2rem;
   }
   .btn-shine {
-    background-image: linear-gradient(110deg, rgba(0,191,255,0.2) 0%, rgba(255,255,255,0.18) 20%, rgba(0,191,255,0.2) 40%);
+    background-image: linear-gradient(110deg, rgba(14,165,233,0.15) 0%, rgba(255,255,255,0.3) 20%, rgba(14,165,233,0.15) 40%);
     background-size: 200% 100%;
   }
   .btn-shine:hover { animation: background-shine 1.6s linear; }
@@ -51,8 +45,8 @@
     position: absolute;
     inset: -20%;
     border-radius: 999px;
-    background: radial-gradient(circle at 50% 50%, rgba(0,191,255,0.25), transparent 60%),
-                radial-gradient(circle at 60% 40%, rgba(138,43,226,0.2), transparent 60%);
+    background: radial-gradient(circle at 50% 50%, rgba(14,165,233,0.1), transparent 60%),
+                radial-gradient(circle at 60% 40%, rgba(99,102,241,0.08), transparent 60%);
     filter: blur(24px);
     animation: aura-breathe 6s ease-in-out infinite;
     z-index: 0;
@@ -74,16 +68,16 @@ h5:hover .anchor,
 h6:hover .anchor { opacity: 1; }
 
 article pre {
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.1);
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
   border-radius: 12px;
   padding: 1rem;
   overflow: auto;
 }
 
 article code.inline-code {
-  background: rgba(255,255,255,0.08);
-  border: 1px solid rgba(255,255,255,0.15);
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
   border-radius: 6px;
   padding: 0.1rem 0.3rem;
 }
@@ -96,7 +90,7 @@ article ul {
 article blockquote {
   border-left: 3px solid var(--color-electric-blue);
   padding-left: 1rem;
-  color: var(--color-gray-300);
+  color: #334155;
 }
 
 @keyframes aurora {
@@ -118,9 +112,9 @@ article blockquote {
 }
 
 @keyframes aura-breathe {
-  0% { opacity: 0.6; transform: scale(0.98); }
-  50% { opacity: 0.9; transform: scale(1.02); }
-  100% { opacity: 0.6; transform: scale(0.98); }
+  0% { opacity: 0.3; transform: scale(0.98); }
+  50% { opacity: 0.5; transform: scale(1.02); }
+  100% { opacity: 0.3; transform: scale(0.98); }
 }
 
 @keyframes fade-in-up {

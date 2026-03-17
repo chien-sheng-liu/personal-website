@@ -67,24 +67,17 @@ const floatingVariants = {
 const ContactPage = () => {
   const [calendarOpen, setCalendarOpen] = useState(false);
   return (
-    <div className="relative min-h-screen text-[var(--color-white)] overflow-hidden">
-      {/* 背景效果 */}
+    <div className="relative min-h-screen text-slate-800 overflow-hidden">
+      {/* Subtle background */}
       <div className="absolute inset-0">
-        <div className="absolute top-1/4 left-0 w-96 h-96 bg-[var(--color-electric-blue)] rounded-full mix-blend-screen filter blur-3xl opacity-15 animate-pulse"></div>
-        <div className="absolute top-1/2 right-0 w-96 h-96 bg-[var(--color-violet-glow)] rounded-full mix-blend-screen filter blur-3xl opacity-15 animate-pulse" style={{ animationDelay: "2s" }}></div>
-        <div className="absolute bottom-1/3 left-1/3 w-64 h-64 bg-[var(--color-electric-blue)] rounded-full mix-blend-screen filter blur-3xl opacity-10 animate-pulse" style={{ animationDelay: "4s" }}></div>
-
-        {/* 漂浮幾何 */}
-        <motion.div className="absolute top-1/4 right-1/4 w-4 h-4 border-2 border-[var(--color-electric-blue)]/30 rotate-45" variants={floatingVariants} animate="animate" />
-        <motion.div className="absolute top-2/3 left-1/5 w-3 h-3 bg-[var(--color-violet-glow)]/40 rounded-full" variants={floatingVariants} animate="animate" style={{ animationDelay: "2s" }} />
-        <motion.div className="absolute top-1/2 left-1/4 w-2 h-2 border border-[var(--color-electric-blue)]/40 rounded-full" variants={floatingVariants} animate="animate" style={{ animationDelay: "3s" }} />
+        <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_30%_20%,rgba(14,165,233,0.05),transparent_50%),radial-gradient(circle_at_70%_60%,rgba(99,102,241,0.04),transparent_50%)]"></div>
       </div>
 
       <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 py-16">
         {/* Hero */}
         <motion.div className="text-center mb-16" initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
           <motion.h1
-            className="text-5xl md:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white via-[var(--color-electric-blue)] to-[var(--color-violet-glow)]"
+            className="text-5xl md:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-slate-900 via-sky-600 to-indigo-600"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
@@ -92,13 +85,13 @@ const ContactPage = () => {
             與我聯繫
           </motion.h1>
           <motion.p
-            className="text-xl text-[var(--color-gray-300)] max-w-3xl mx-auto leading-relaxed mb-8"
+            className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed mb-8"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
             我非常樂意與您討論潛在的合作機會、專案想法，或任何與{" "}
-            <span className="text-[var(--color-electric-blue)] font-semibold">數據科學</span>、<span className="text-[var(--color-violet-glow)] font-semibold">AI</span>{" "}
+            <span className="text-sky-500 font-semibold">數據科學</span>、<span className="text-indigo-500 font-semibold">AI</span>{" "}
             相關的話題。
           </motion.p>
 
@@ -107,12 +100,12 @@ const ContactPage = () => {
               <motion.div
                 key={index}
                 variants={itemVariants}
-                className="flex items-center space-x-3 px-6 py-3 bg-[var(--color-gray-800)]/50 backdrop-blur-lg rounded-full border border-[var(--color-gray-700)]/50"
+                className="flex items-center space-x-3 px-6 py-3 bg-white shadow-sm rounded-full border border-slate-200"
               >
-                <div className="text-[var(--color-electric-blue)]">{info.icon}</div>
+                <div className="text-sky-500">{info.icon}</div>
                 <div>
-                  <span className="text-[var(--color-gray-400)] text-sm">{info.label}:</span>
-                  <span className="text-white font-medium ml-2">{info.value}</span>
+                  <span className="text-slate-500 text-sm">{info.label}:</span>
+                  <span className="text-slate-800 font-medium ml-2">{info.value}</span>
                 </div>
               </motion.div>
             ))}
@@ -122,25 +115,25 @@ const ContactPage = () => {
         <div className="max-w-6xl mx-auto">
           {/* 聯絡方式卡片 */}
           <motion.div className="space-y-6" variants={containerVariants} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }}>
-            <motion.h2 className="text-3xl font-bold text-white mb-8" variants={itemVariants}>
+            <motion.h2 className="text-3xl font-bold text-slate-900 mb-8" variants={itemVariants}>
               聯絡方式
             </motion.h2>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {contactInfo.map((item, index) => {
-                const base = "group block relative overflow-hidden bg-gradient-to-br from-[var(--color-gray-800)]/80 to-[var(--color-gray-800)]/40 backdrop-blur-xl rounded-2xl p-6 border border-[var(--color-gray-700)]/50 transition-all duration-500 hover:border-[var(--color-electric-blue)]/50 hover:shadow-2xl hover:shadow-[var(--color-electric-blue)]/10";
+                const base = "group block relative overflow-hidden bg-white rounded-2xl p-6 border border-slate-200 shadow-sm transition-all duration-500 hover:border-sky-300 hover:shadow-lg";
                 const inner = (
                   <>
                     <div className={`absolute inset-0 bg-gradient-to-r ${item.color} opacity-0 group-hover:opacity-5 transition-opacity duration-500`}></div>
                     <div className="relative flex items-center space-x-6">
                       <div className={`flex-shrink-0 w-16 h-16 bg-gradient-to-br ${item.color} rounded-2xl flex items-center justify-center text-white shadow-lg`}>{item.icon}</div>
                       <div className="flex-1 min-w-0">
-                        <h3 className="text-xl font-bold text-white group-hover:text-[var(--color-electric-blue)] transition-colors duration-300">{item.label}</h3>
-                        <p className="text-[var(--color-gray-300)] font-medium mt-1 group-hover:text-white transition-colors duration-300">{item.value}</p>
-                        <p className="text-sm text-[var(--color-gray-500)] mt-1 group-hover:text-[var(--color-gray-400)] transition-colors duration-300">{item.description}</p>
+                        <h3 className="text-xl font-bold text-slate-800 group-hover:text-sky-600 transition-colors duration-300">{item.label}</h3>
+                        <p className="text-slate-600 font-medium mt-1 group-hover:text-slate-800 transition-colors duration-300">{item.value}</p>
+                        <p className="text-sm text-slate-400 mt-1 group-hover:text-slate-500 transition-colors duration-300">{item.description}</p>
                       </div>
-                      <div className="flex-shrink-0 w-8 h-8 rounded-full bg-[var(--color-electric-blue)]/10 flex items-center justify-center group-hover:bg-[var(--color-electric-blue)]/20 transition-all duration-300">
-                        <span className="text-[var(--color-electric-blue)] text-sm">→</span>
+                      <div className="flex-shrink-0 w-8 h-8 rounded-full bg-sky-500/10 flex items-center justify-center group-hover:bg-sky-500/20 transition-all duration-300">
+                        <span className="text-sky-500 text-sm">→</span>
                       </div>
                     </div>
                   </>
@@ -159,12 +152,12 @@ const ContactPage = () => {
 
             <motion.div
               variants={itemVariants}
-              className="relative overflow-hidden bg-gradient-to-br from-[var(--color-gray-800)]/60 to-[var(--color-gray-800)]/30 backdrop-blur-xl rounded-2xl p-6 border border-[var(--color-violet-glow)]/30"
+              className="relative overflow-hidden bg-indigo-50 rounded-2xl p-6 border border-indigo-200"
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-[var(--color-violet-glow)]/5 to-[var(--color-electric-blue)]/5"></div>
+              <div className="absolute inset-0 bg-gradient-to-r from-indigo-50/50 to-sky-50/50"></div>
               <div className="relative">
-                <h3 className="text-lg font-bold text-[var(--color-violet-glow)] mb-2">回覆承諾</h3>
-                <p className="text-[var(--color-gray-400)] text-sm leading-relaxed">
+                <h3 className="text-lg font-bold text-indigo-500 mb-2">回覆承諾</h3>
+                <p className="text-slate-500 text-sm leading-relaxed">
                   我承諾在 24-48 小時內回覆所有訊息。對於緊急事項，請直接透過 Email 聯繫，並在主旨標註「緊急」。
                 </p>
               </div>
@@ -183,20 +176,12 @@ const ContactPage = () => {
           transition={{ duration: 0.8 }}
         >
           <div className="max-w-3xl mx-auto">
-            <h3 className="text-3xl font-bold text-white mb-4">準備開始合作了嗎？</h3>
-            <p className="text-[var(--color-gray-400)] mb-8 leading-relaxed">
+            <h3 className="text-3xl font-bold text-slate-900 mb-4">準備開始合作了嗎？</h3>
+            <p className="text-slate-500 mb-8 leading-relaxed">
               無論是 AI 專案開發、職涯諮詢，或是任何數據科學相關的挑戰，我都很樂意與您討論並提供專業建議。
             </p>
             <motion.div
-              className="inline-flex items-center space-x-2 px-8 py-3 bg-[var(--color-electric-blue)]/10 border border-[var(--color-electric-blue)]/30 rounded-full text-[var(--color-electric-blue)]"
-              animate={{
-                boxShadow: [
-                  "0 0 20px rgba(0, 191, 255, 0.0)",
-                  "0 0 20px rgba(0, 191, 255, 0.3)",
-                  "0 0 20px rgba(0, 191, 255, 0.0)",
-                ],
-              }}
-              transition={{ duration: 3, repeat: Infinity }}
+              className="inline-flex items-center space-x-2 px-8 py-3 bg-sky-50 border border-sky-200 rounded-full text-sky-600"
             >
               <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
               <span className="font-medium">線上且隨時準備回覆</span>
@@ -205,22 +190,22 @@ const ContactPage = () => {
         </motion.div>
       </div>
       {calendarOpen && (
-        <div className="fixed inset-0 z-[60] bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="w-full max-w-lg bg-[var(--color-gray-900)]/80 border border-white/10 rounded-2xl p-6 relative">
-            <button onClick={() => setCalendarOpen(false)} className="absolute top-3 right-3 rounded-full bg-white/10 hover:bg-white/20 px-2 py-1 text-sm">✕</button>
-            <h3 className="text-2xl font-bold text-white mb-2">選擇可約時段</h3>
-            <p className="text-sm text-[var(--color-gray-400)] mb-4">時區：HKT（UTC+8）。你也可以直接開啟 Google Calendar 預約。</p>
+        <div className="fixed inset-0 z-[60] bg-black/20 backdrop-blur-sm flex items-center justify-center p-4">
+          <div className="w-full max-w-lg bg-white border border-slate-200 rounded-2xl p-6 relative shadow-2xl">
+            <button onClick={() => setCalendarOpen(false)} className="absolute top-3 right-3 rounded-full bg-slate-100 hover:bg-slate-200 px-2 py-1 text-sm text-slate-600">✕</button>
+            <h3 className="text-2xl font-bold text-slate-900 mb-2">選擇可約時段</h3>
+            <p className="text-sm text-slate-500 mb-4">時區：HKT（UTC+8）。你也可以直接開啟 Google Calendar 預約。</p>
             <div className="space-y-2 mb-4">
               {['本週三 20:00 - 20:30','本週六 10:00 - 10:30','下週一 19:30 - 20:00'].map((slot, i) => (
-                <div key={i} className="flex items-center justify-between bg-white/5 border border-white/10 rounded-xl px-4 py-3">
-                  <div className="text-white text-sm">{slot}</div>
-                  <a href="https://calendar.app.google/jPexFUzauM39fYfV9" target="_blank" rel="noopener noreferrer" className="text-[var(--color-electric-blue)] hover:text-[var(--color-violet-glow)] text-sm font-semibold">預約</a>
+                <div key={i} className="flex items-center justify-between bg-slate-50 border border-slate-200 rounded-xl px-4 py-3">
+                  <div className="text-slate-800 text-sm">{slot}</div>
+                  <a href="https://calendar.app.google/jPexFUzauM39fYfV9" target="_blank" rel="noopener noreferrer" className="text-sky-500 hover:text-indigo-500 text-sm font-semibold">預約</a>
                 </div>
               ))}
             </div>
             <div className="flex items-center justify-between">
-              <a href="https://calendar.app.google/jPexFUzauM39fYfV9" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center px-4 py-2 rounded-lg bg-[var(--color-electric-blue)] text-black font-semibold">開啟 Google Calendar</a>
-              <button onClick={() => setCalendarOpen(false)} className="text-sm text-[var(--color-gray-300)] hover:text-white">稍後再說</button>
+              <a href="https://calendar.app.google/jPexFUzauM39fYfV9" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center px-4 py-2 rounded-lg bg-sky-500 text-white font-semibold hover:bg-sky-600">開啟 Google Calendar</a>
+              <button onClick={() => setCalendarOpen(false)} className="text-sm text-slate-500 hover:text-slate-800">稍後再說</button>
             </div>
           </div>
         </div>

@@ -18,7 +18,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="zh-TW" suppressHydrationWarning>
-      <body className="bg-deep-space text-gray-300 transition-colors duration-500">
+      <body className="bg-slate-50 text-slate-700 transition-colors duration-500">
         <ThemeProvider>
           <Navbar />
           {/* Ensure the main content area has padding top to not be obscured by the fixed navbar */}

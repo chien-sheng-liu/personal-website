@@ -21,7 +21,7 @@ const ParticlesBackground = () => {
 
   const options = useMemo(
     () => ({
-      background: { color: { value: "#0d1117" } },
+      background: { color: { value: "transparent" } },
       fpsLimit: 45,
       interactivity: {
         events: {
@@ -33,11 +33,11 @@ const ParticlesBackground = () => {
       particles: {
         color: { value: "#94a3b8" },
         links: {
-          color: "#94a3b8",
+          color: "#cbd5e1",
           distance: isMobile ? 120 : 160,
           enable: true,
-          opacity: isMobile ? 0.06 : 0.09,
-          width: 0.35,
+          opacity: isMobile ? 0.15 : 0.2,
+          width: 0.5,
         },
         collisions: { enable: false },
         move: {
@@ -49,7 +49,7 @@ const ParticlesBackground = () => {
           straight: false,
         },
         number: { density: { enable: true }, value: isMobile ? 10 : 20 },
-        opacity: { value: isMobile ? 0.08 : 0.12 },
+        opacity: { value: isMobile ? 0.15 : 0.2 },
         shape: { type: "circle" },
         size: { value: { min: 0.6, max: 1.6 } },
       },

@@ -16,7 +16,7 @@ export default function MarkdownRenderer({ html }) {
       try {
         // Load shiki from CDN on client. Works in browser; ignored by bundler.
         const shiki = await import(/* webpackIgnore: true */ 'https://esm.sh/shiki@1.20.0');
-        const highlighter = await shiki.getHighlighter({ themes: ['github-dark'], langs: ['javascript','typescript','python','bash','json','markdown'] });
+        const highlighter = await shiki.getHighlighter({ themes: ['github-light'], langs: ['javascript','typescript','python','bash','json','markdown'] });
         const root = ref.current;
         if (!root) return;
         const blocks = root.querySelectorAll('pre > code');
@@ -24,7 +24,7 @@ export default function MarkdownRenderer({ html }) {
           const pre = codeEl.parentElement;
           const lang = (codeEl.className || '').replace(/.*language-([\w+-]+).*/, '$1') || pre.getAttribute('data-lang') || 'text';
           const raw = codeEl.textContent || '';
-          const html = highlighter.codeToHtml(raw, { lang, theme: 'github-dark' });
+          const html = highlighter.codeToHtml(raw, { lang, theme: 'github-light' });
           // Replace <pre> block with shiki HTML
           const wrapper = document.createElement('div');
           wrapper.innerHTML = html;
