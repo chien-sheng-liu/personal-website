@@ -8,7 +8,7 @@ import WorldMapBackground from "./WorldMapBackground";
 const events = [
   {
     year: "2026", title: "Lead - Business Intelligence", org: "Lalamove", flag: "🇭🇰", type: "work",
-    loc: "九龍塘", locFull: "香港",
+    loc: "九龍塘", locFull: "香港", duration: "2025.12 – Present",
     detail: [
       "跨市場建置 KPI、供需監控與漏斗儀表板，讓決策即時化",
       "與 DE/DA 共建 dbt・LookML 治理與資料規格，加速交付",
@@ -18,7 +18,7 @@ const events = [
   },
   {
     year: "2024", title: "Deputy Manager - Data & AI", org: "Datarget 創代科技", flag: "🇹🇼", type: "work",
-    loc: "台北", locFull: "台灣",
+    loc: "台北", locFull: "台灣", duration: "2024.01 – 2025.11",
     detail: [
       "Built & led 8 人 AI/Data 團隊，包辦需求、KPI 設計到上線",
       "交付 15+ analytics/AI 專案，為各產業創造 NT$8,000 萬",
@@ -29,7 +29,7 @@ const events = [
   },
   {
     year: "2023", title: "Machine Learning Engineer", org: "OneAD", flag: "🇹🇼", type: "work",
-    loc: "台北", locFull: "台灣",
+    loc: "台北", locFull: "台灣", duration: "2023.02 – 2023.12",
     detail: [
       "設計/部署多格式 ML・DL targeting 模型，CTR +20%、停留 +30%",
       "重構 cross-device 系統，推論 +40%、GCP 成本 -30%",
@@ -39,7 +39,7 @@ const events = [
   },
   {
     year: "2023", title: "資料科學講師", org: "DeepCoding", flag: "🇹🇼", type: "work",
-    loc: "台北", locFull: "台灣",
+    loc: "台北", locFull: "台灣", duration: "2022.06 – 2023.12",
     detail: [
       "Delivered custom data/AI workshops，累積 100+ 學員",
       "與大學/企業合辦 LLM、資料分析課程，聚焦實作",
@@ -49,7 +49,7 @@ const events = [
   },
   {
     year: "2022", title: "Marketing Analyst", org: "HelloFresh SE", flag: "🇩🇪", type: "work",
-    loc: "柏林", locFull: "德國",
+    loc: "柏林", locFull: "德國", duration: "2021.10 – 2022.10",
     detail: [
       "為 18 市場部署 conversion/CTR/Revenue 預測，準確度約 85%",
       "打造 CTR/CVR funnel 與 penetration dashboard 支援行銷決策",
@@ -59,7 +59,7 @@ const events = [
   },
   {
     year: "2021", title: "Research Assistant", org: "ZEW 經濟研究中心", flag: "🇩🇪", type: "work",
-    loc: "Mannheim", locFull: "德國",
+    loc: "Mannheim", locFull: "德國", duration: "2020.10 – 2021.09",
     detail: [
       "建立 OCR + text-mining pipeline 處理中文社會信用資料",
       "設計自動化爬蟲，日更經濟/財政/政策資訊",
@@ -68,7 +68,7 @@ const events = [
   },
   {
     year: "2020", title: "Master - Business Informatics", org: "Universität Mannheim", flag: "🇩🇪", type: "education",
-    loc: "Mannheim", locFull: "德國",
+    loc: "Mannheim", locFull: "德國", duration: "2019.09 – 2022.03",
     detail: [
       "Business Informatics (Data Science Track) 連結資訊與商業",
       "Thesis：Handling Covid-disrupted forecasting in MarTech",
@@ -78,7 +78,7 @@ const events = [
   },
   {
     year: "2019", title: "交換生", org: "Universität Bayreuth", flag: "🇩🇪", type: "education",
-    loc: "Bayreuth", locFull: "德國",
+    loc: "Bayreuth", locFull: "德國", duration: "2018.10 – 2019.07",
     detail: [
       "Business Engineering 交換，修習供應鏈/製造/管理課程",
       "以英文與德文完成專題與簡報，提升溝通力",
@@ -87,7 +87,7 @@ const events = [
   },
   {
     year: "2017", title: "Software Engineer Intern", org: "Mitac", flag: "🇨🇳", type: "work",
-    loc: "昆山", locFull: "China",
+    loc: "昆山", locFull: "China", duration: "2017.07 – 2017.09",
     detail: [
       "開發 C#/.NET 後端並整合 WeChat API 的會議安排系統",
       "設計 workflow 讓差旅報銷效率提升 25%",
@@ -96,7 +96,7 @@ const events = [
   },
   {
     year: "2015", title: "Bachelor - 資訊管理", org: "中原大學", flag: "🇹🇼", type: "education",
-    loc: "桃園", locFull: "台灣",
+    loc: "桃園", locFull: "台灣", duration: "2015.09 – 2019.06",
     detail: [
       "資管主修、企管輔系，奠定資訊 × 管理基礎",
       "系學會會長，策畫跨院活動與專案",
@@ -211,11 +211,11 @@ export default function FlightTimeline() {
   const progressWidth = useTransform(dragX, [0, dragConstraint || -1], ["0%", "100%"]);
 
   return (
-    <section className="relative py-16 overflow-hidden">
+    <section className="relative py-8 overflow-hidden">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 
         {/* ── Header ── */}
-        <div className="text-center mb-10">
+        <div className="text-center mb-6">
           <motion.div
             initial={{ opacity: 0, y: 8 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -248,7 +248,7 @@ export default function FlightTimeline() {
       {/* ═══ Timeline — no outer box, full-bleed map ═══ */}
       <div
         className="group/timeline relative overflow-hidden"
-        style={{ height: "clamp(500px, 62vh, 680px)" }}
+        style={{ height: "clamp(380px, 45vh, 480px)" }}
       >
         {/* ── World map — prominent ── */}
         <div className="absolute inset-0 pointer-events-none opacity-[0.55]">
@@ -369,16 +369,13 @@ export default function FlightTimeline() {
                           <div className="flex-1 min-w-0">
                             <div className="text-[8px] text-slate-400 uppercase tracking-wider">Role</div>
                             <div className="text-sm font-bold text-[#1d1d1f] leading-snug">{ev.title}</div>
-                          </div>
-                          <div className="flex-1 min-w-0">
-                            <div className="text-[8px] text-slate-400 uppercase tracking-wider">Company</div>
-                            <div className="text-sm font-semibold text-[#1d1d1f] leading-snug">{ev.org}</div>
+                            <div className="text-xs text-slate-500 leading-snug">{ev.org}</div>
                           </div>
                         </div>
 
-                        {/* Org + barcode */}
+                        {/* Duration + barcode */}
                         <div className="flex items-end justify-between mt-auto pt-2">
-                          <div className="text-[13px] font-semibold text-[#1d1d1f] truncate mr-3">{ev.org}</div>
+                          <div className="text-[11px] font-medium text-slate-500 truncate mr-3">{ev.duration}</div>
                           <BarcodeSVG width={80} height={14} />
                         </div>
                       </div>

@@ -16,12 +16,12 @@ import Card3D from "@/components/Card3D";
  */
 export default function CtaSection({ title, description, buttonLabel, buttonHref }) {
   return (
-    <section className="relative px-4 sm:px-6 lg:px-8 py-20 sm:py-28">
+    <section className="relative px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
       <AnimatedGradientBg variant="bottom" />
       <div className="relative z-10 mx-auto max-w-2xl">
         <ScrollReveal>
           <Card3D intensity={4}>
-            <div className="glass-panel rounded-3xl border border-white/40 shadow-lg px-8 py-12 text-center">
+            <div className="glass-panel rounded-3xl border border-white/40 shadow-lg px-8 py-8 text-center">
               <h3 className="text-2xl sm:text-3xl font-bold text-[#1d1d1f] mb-3">
                 {title}
               </h3>
