@@ -41,6 +41,13 @@ html {
   @supports not (backdrop-filter: blur(12px)) {
     .glass-panel { background: rgba(255, 255, 255, 0.92); }
   }
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 /* Markdown styles & anchors */

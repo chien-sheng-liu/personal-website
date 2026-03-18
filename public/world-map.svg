@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 680" fill="none">
+  <!-- Simplified world map (equirectangular) with continent groups -->
+
+  <defs>
+    <!-- Continent fill gradients - warm earthy tones -->
+    <linearGradient id="grad-americas" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#34d399" stop-opacity="0.22" />
+      <stop offset="100%" stop-color="#2dd4bf" stop-opacity="0.15" />
+    </linearGradient>
+    <linearGradient id="grad-europe" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#a78bfa" stop-opacity="0.18" />
+      <stop offset="100%" stop-color="#818cf8" stop-opacity="0.12" />
+    </linearGradient>
+    <linearGradient id="grad-africa" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fb923c" stop-opacity="0.18" />
+      <stop offset="100%" stop-color="#f59e0b" stop-opacity="0.12" />
+    </linearGradient>
+    <linearGradient id="grad-asia" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.18" />
+      <stop offset="100%" stop-color="#34d399" stop-opacity="0.14" />
+    </linearGradient>
+    <linearGradient id="grad-oceania" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f472b6" stop-opacity="0.18" />
+      <stop offset="100%" stop-color="#fb923c" stop-opacity="0.12" />
+    </linearGradient>
+  </defs>
+
+  <!-- North America -->
+  <g class="continent" id="north-america">
+    <path d="M120 120 L140 95 L175 80 L210 75 L240 82 L265 95 L280 80 L295 72 L310 78 L300 100 L310 115 L295 130 L285 155 L278 175 L260 195 L248 220 L235 245 L225 260 L210 278 L195 290 L182 298 L170 295 L160 280 L150 260 L142 240 L138 220 L132 195 L125 170 L120 150 Z" fill="url(#grad-americas)" stroke="#94a3b8" stroke-width="0.5" stroke-opacity="0.15"/>
+    <!-- Greenland -->
+    <path d="M265 55 L285 48 L310 52 L320 62 L315 75 L295 72 L280 65 Z" fill="url(#grad-americas)" stroke="#94a3b8" stroke-width="0.5" stroke-opacity="0.15"/>
+  </g>
+
+  <!-- South America -->
+  <g class="continent" id="south-america">
+    <path d="M195 305 L210 298 L228 305 L240 320 L248 345 L252 370 L250 400 L245 430 L238 455 L228 478 L218 495 L205 508 L195 515 L188 505 L182 485 L178 460 L175 435 L178 410 L182 385 L185 360 L188 340 L192 320 Z" fill="url(#grad-americas)" stroke="#94a3b8" stroke-width="0.5" stroke-opacity="0.15"/>
+  </g>
+
+  <!-- Europe -->
+  <g class="continent" id="europe">
+    <path d="M480 80 L500 72 L525 68 L548 72 L565 80 L575 95 L580 110 L575 128 L565 142 L548 155 L535 162 L520 168 L505 165 L492 158 L482 145 L478 128 L475 110 L478 95 Z" fill="url(#grad-europe)" stroke="#94a3b8" stroke-width="0.5" stroke-opacity="0.15"/>
+    <!-- Scandinavia -->
+    <path d="M520 42 L535 35 L548 38 L555 50 L550 65 L540 72 L525 68 L518 58 Z" fill="url(#grad-europe)" stroke="#94a3b8" stroke-width="0.5" stroke-opacity="0.15"/>
+    <!-- British Isles -->
+    <path d="M462 82 L472 78 L478 85 L475 95 L468 98 L462 92 Z" fill="url(#grad-europe)" stroke="#94a3b8" stroke-width="0.5" stroke-opacity="0.15"/>
+  </g>
+
+  <!-- Africa -->
+  <g class="continent" id="africa">
+    <path d="M498 195 L518 188 L540 192 L558 205 L572 225 L580 250 L582 280 L578 310 L572 338 L562 365 L548 390 L535 408 L520 420 L505 425 L492 418 L482 402 L478 378 L475 355 L478 328 L482 302 L488 275 L492 250 L495 225 Z" fill="url(#grad-africa)" stroke="#94a3b8" stroke-width="0.5" stroke-opacity="0.15"/>
+    <!-- Madagascar -->
+    <path d="M595 365 L602 358 L608 368 L605 385 L598 392 L592 382 Z" fill="url(#grad-africa)" stroke="#94a3b8" stroke-width="0.5" stroke-opacity="0.15"/>
+  </g>
+
+  <!-- Asia -->
+  <g class="continent" id="asia">
+    <path d="M590 55 L625 42 L665 38 L710 42 L755 52 L795 65 L830 82 L860 100 L880 118 L895 138 L900 160 L895 182 L885 202 L870 218 L850 232 L828 242 L805 248 L780 250 L755 248 L730 242 L710 232 L695 220 L678 205 L665 188 L650 172 L638 158 L625 142 L612 125 L600 108 L592 90 L588 72 Z" fill="url(#grad-asia)" stroke="#94a3b8" stroke-width="0.5" stroke-opacity="0.15"/>
+    <!-- India -->
+    <path d="M710 248 L728 255 L740 272 L745 295 L738 318 L728 335 L715 345 L702 338 L695 320 L692 298 L695 275 L700 260 Z" fill="url(#grad-asia)" stroke="#94a3b8" stroke-width="0.5" stroke-opacity="0.15"/>
+    <!-- Southeast Asia -->
+    <path d="M790 255 L810 248 L835 255 L852 268 L860 285 L855 305 L842 318 L825 325 L808 320 L795 308 L788 290 L785 272 Z" fill="url(#grad-asia)" stroke="#94a3b8" stroke-width="0.5" stroke-opacity="0.15"/>
+    <!-- Japan/Korea -->
+    <path d="M882 128 L895 120 L908 125 L912 140 L905 155 L895 160 L885 155 L880 142 Z" fill="url(#grad-asia)" stroke="#94a3b8" stroke-width="0.5" stroke-opacity="0.15"/>
+    <!-- Taiwan -->
+    <path d="M862 215 L868 210 L874 218 L872 228 L866 232 L860 225 Z" fill="url(#grad-asia)" stroke="#94a3b8" stroke-width="0.5" stroke-opacity="0.15"/>
+  </g>
+
+  <!-- Oceania / Australia -->
+  <g class="continent" id="oceania">
+    <path d="M830 380 L858 368 L888 372 L915 385 L932 405 L938 428 L932 452 L918 470 L898 482 L875 485 L852 478 L835 465 L825 445 L822 425 L825 402 Z" fill="url(#grad-oceania)" stroke="#94a3b8" stroke-width="0.5" stroke-opacity="0.15"/>
+    <!-- New Zealand -->
+    <path d="M955 468 L962 462 L968 472 L965 485 L958 490 L952 480 Z" fill="url(#grad-oceania)" stroke="#94a3b8" stroke-width="0.5" stroke-opacity="0.15"/>
+  </g>
+</svg>
