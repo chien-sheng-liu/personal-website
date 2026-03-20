@@ -17,8 +17,8 @@ const stagger = { hidden: {}, visible: { transition: { staggerChildren: 0.1 } } 
 const heroStats = [
   { value: "5+ 年", label: "數據與 AI 經驗", icon: "📊" },
   { value: "3 國", label: "跨市場經歷", icon: "🌏" },
-  { value: "NT$8,000 萬", label: "AI 驅動營收", icon: "💰" },
-  { value: "25+ 專案", label: "端到端客製戶交付", icon: "🚀" },
+  { value: "US$300 萬", label: "AI 驅動營收", icon: "💰" },
+  { value: "25 專案", label: "端到端客製戶交付", icon: "🚀" },
 ];
 
 const skillTags = [

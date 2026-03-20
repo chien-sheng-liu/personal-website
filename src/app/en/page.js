@@ -17,8 +17,8 @@ const stagger = { hidden: {}, visible: { transition: { staggerChildren: 0.1 } } 
 const heroStats = [
   { value: "5+ yrs", label: "Data & AI Experience", icon: "📊" },
   { value: "3 Countries", label: "Cross-market Experience", icon: "🌏" },
-  { value: "NT$80M", label: "AI-driven Revenue", icon: "💰" },
-  { value: "25+ Projects", label: "End-to-end Delivery", icon: "🚀" },
+  { value: "US$ 300M", label: "AI-driven Revenue", icon: "💰" },
+  { value: "25 Projects", label: "End-to-end Delivery", icon: "🚀" },
 ];
 
 const skillTags = [
