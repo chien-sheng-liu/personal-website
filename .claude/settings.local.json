@@ -22,7 +22,8 @@
       "Bash(npm view:*)",
       "Bash(NODE_OPTIONS=\"--max-old-space-size=4096\" npx next build)",
       "Bash(NODE_OPTIONS=\"--max-old-space-size=4096\" npm run build)",
-      "Bash(git:*)"
+      "Bash(git:*)",
+      "Bash(NEXT_PUBLIC_BASE_PATH=/personal-website NODE_OPTIONS=\"--max-old-space-size=4096\" npm run build)"
     ]
   }
 }

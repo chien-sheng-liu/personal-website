@@ -141,7 +141,7 @@ export default function WorldMapBackground() {
   const dots = useScatteredDots(55);
 
   useEffect(() => {
-    fetch("/data/world-110m.json")
+    fetch(`${process.env.NEXT_PUBLIC_BASE_PATH ?? ''}/data/world-110m.json`)
       .then((r) => r.json())
       .then((topo) => {
         const geo = feature(topo, topo.objects.countries);
