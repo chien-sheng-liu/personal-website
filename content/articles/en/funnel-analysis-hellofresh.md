@@ -2,6 +2,7 @@
 title: "Funnel Analysis in Practice: Breaking Down Conversions with HelloFresh"
 date: 2026-03-19
 tags: [Product Analytics, Funnel Analysis, HelloFresh, Growth]
+category: Data Analysis
 ---
 
 Funnel analysis is one of the most fundamental and practical methods in product analytics. It tracks user behavior through a sequence of ordered steps, quantifying conversion and drop-off at each stage. This article uses HelloFresh's subscription business model to walk through the full framework: defining funnels, calculating metrics, identifying bottlenecks, and developing optimization strategies.

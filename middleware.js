@@ -2,7 +2,6 @@ import { NextResponse } from 'next/server';
 
 function pickLangFromAcceptLanguage(header) {
   const h = (header || '').toLowerCase();
-  if (h.includes('yue') || h.includes('zh-hk')) return 'yue';
   if (h.includes('zh-tw') || h.includes('zh-hant') || h.includes('zh')) return 'zh';
   if (h.includes('en')) return 'en';
   return 'zh';
@@ -18,7 +17,7 @@ export function middleware(request) {
   }
 
   // Respect explicit locale prefixes
-  if (pathname.startsWith('/en') || pathname.startsWith('/yue')) {
+  if (pathname.startsWith('/en')) {
     return NextResponse.next();
   }
 
@@ -41,4 +40,3 @@ export function middleware(request) {
 export const config = {
   matcher: ['/((?!_next|api|.*\\..*).*)'],
 };
-

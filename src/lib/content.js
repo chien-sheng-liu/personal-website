@@ -63,6 +63,7 @@ export async function listArticles(locale = 'zh') {
           date: frontmatter.date || '',
           readingTime: frontmatter.readingTime || estimateReadingTime(body, locale),
           tags: Array.isArray(frontmatter.tags) ? frontmatter.tags : [],
+          category: frontmatter.category || '',
         };
       })
       .filter(Boolean)

@@ -10,7 +10,18 @@
       "Bash(ls:*)",
       "Bash(for comp:*)",
       "Bash(do echo:*)",
-      "Bash(grep -v \"//$comp\")"
+      "Bash(grep -v \"//$comp\")",
+      "Bash(find /Users/morris/Desktop/Me/Self/personal-website -type f \\\\\\(-path *yue* -o -path */content/articles/* -o -path */content/projects/* \\\\\\))",
+      "Bash(head:*)",
+      "Bash(npx next:*)",
+      "Bash(git stash:*)",
+      "Bash(echo \"exit: $?\")",
+      "Bash(npm -v)",
+      "Bash(DEBUG=*)",
+      "Bash(npm ls:*)",
+      "Bash(npm view:*)",
+      "Bash(NODE_OPTIONS=\"--max-old-space-size=4096\" npx next build)",
+      "Bash(NODE_OPTIONS=\"--max-old-space-size=4096\" npm run build)"
     ]
   }
 }

@@ -41,18 +41,6 @@ const i18n = {
     ctaBtn: "View GitHub",
     updating: "Continuously updating",
   },
-  yue: {
-    tagline: "Projects",
-    title: "我嘅項目作品",
-    desc: "數據科學、機器學習、全端開發 — 將複雜問題變成落地方案。",
-    all: "全部",
-    viewCode: "睇程式碼",
-    viewDetail: "了解更多",
-    ctaTitle: "想知更多？",
-    ctaDesc: "每個項目背後都有獨特嘅挑戰。歡迎去 GitHub 睇更多細節。",
-    ctaBtn: "睇 GitHub",
-    updating: "持續更新緊",
-  },
 };
 
 const iconForCategory = (cat) => {

@@ -14,33 +14,32 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ### Stack
 Next.js 15 (App Router, React 19) + Tailwind CSS v4 (`@theme` directive, not tailwind.config.js) + Framer Motion + d3-geo/topojson-client + tsparticles
 
-### Internationalization (3 locales)
+### Internationalization (2 locales)
 
 | Locale | Route prefix | Default? |
 |--------|-------------|----------|
 | Traditional Chinese (zh) | `/` (no prefix) | Yes |
 | English | `/en/` | No |
-| Cantonese (yue) | `/yue/` | No |
 
 - `middleware.js` (root) handles language detection via cookie `preferred-lang` → Accept-Language header → fallback to `zh`
-- Each locale has its own page files: `src/app/page.js` (zh), `src/app/en/page.js`, `src/app/yue/page.js`
-- Locale sub-layouts: `src/app/en/layout.js`, `src/app/yue/layout.js`
-- **When modifying a page, the same change must be applied to all 3 locale versions**
+- Each locale has its own page files: `src/app/page.js` (zh), `src/app/en/page.js`
+- Locale sub-layout: `src/app/en/layout.js`
+- **When modifying a page, the same change must be applied to both locale versions**
 
 ### Page Structure
 
 Each locale has: homepage (`page.js`), `/about`, `/articles`, `/articles/[slug]`, `/contact`, `/projects`
 
 - Homepage data: inline in each `page.js`
-- Project data: `src/app/projects/projectData.js` (shared by zh/yue), `src/app/en/projects/projectData.js`
+- Project data: `src/data/projectData.js` (shared, locale-aware)
 - About data: `src/app/about/aboutData.js`, `src/app/en/about/aboutData.js`
 
 ### Content System
 
-- Markdown articles/projects in `content/articles/{zh,en,yue}/` and `content/projects/{zh,en,yue}/`
+- Markdown articles in `content/articles/{zh,en}/`
 - `src/lib/content.js` - File-based content reading with frontmatter parsing
-- `src/lib/markdown.js` - Markdown → HTML with TOC generation (uses Shiki `github-light` theme)
-- API routes: `src/app/api/content/articles/` and `src/app/api/content/projects/` serve content as JSON
+- `src/lib/markdown.js` - Markdown → HTML with TOC generation (uses `marked` library)
+- API routes: `src/app/api/content/articles/` serve content as JSON
 
 ### Key Components
 

@@ -2,6 +2,7 @@
 title: 漏斗分析實戰：以 HelloFresh 為例拆解用戶轉換
 date: 2026-03-19
 tags: [Product Analytics, Funnel Analysis, HelloFresh, Growth]
+category: 資料分析
 ---
 
 漏斗分析（Funnel Analysis）是產品分析裡最基礎也最實用的方法之一。它追蹤用戶在一連串有序步驟中的行為，量化每一步的轉換與流失。本文以 HelloFresh 的訂閱制商業模式為例，從定義漏斗、計算指標到找出瓶頸與優化策略，完整拆解這套分析框架。

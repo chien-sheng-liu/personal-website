@@ -89,43 +89,6 @@ const i18n = {
     ],
     responseNote: "Usually reply within 24–48 hours",
   },
-  yue: {
-    tagline: "Let's Talk",
-    heroTitle: "有諗法？傾下啦",
-    heroDesc: "無論係 AI 項目、數據策略，定係純粹交流想法，都歡迎搵我。",
-    location: "香港",
-    languages: "中文 · English · Deutsch",
-    channels: [
-      {
-        key: "email",
-        icon: <FaEnvelope />,
-        label: "Email",
-        subtitle: "最快嘅方式",
-        value: TO_EMAIL,
-        href: `mailto:${TO_EMAIL}`,
-        color: "#ef4444",
-      },
-      {
-        key: "linkedin",
-        icon: <FaLinkedin />,
-        label: "LinkedIn",
-        subtitle: "專業網絡",
-        value: "Chien-Sheng (Morris) Liu",
-        href: LINKEDIN_URL,
-        color: "#0077b5",
-      },
-      {
-        key: "calendar",
-        icon: <FaCalendarAlt />,
-        label: "預約傾計",
-        subtitle: "30 分鐘 · Google Calendar",
-        value: "揀個啱你嘅時間",
-        href: CALENDAR_URL,
-        color: "#16a34a",
-      },
-    ],
-    responseNote: "通常 24–48 小時內回覆",
-  },
 };
 
 const fadeUp = {

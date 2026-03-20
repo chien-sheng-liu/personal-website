@@ -10,7 +10,6 @@ import MarkdownRenderer from "./MarkdownRenderer";
 const i18n = {
   zh: { back: "回到文章列表", backPrefix: "/articles" },
   en: { back: "Back to articles", backPrefix: "/en/articles" },
-  yue: { back: "返到文章列表", backPrefix: "/yue/articles" },
 };
 
 const fadeUp = {
@@ -26,7 +25,7 @@ export default function ArticleDetailPage({ meta, html, toc, locale = "zh" }) {
   const t = i18n[locale] || i18n.zh;
 
   return (
-    <div className="relative min-h-screen text-[#1d1d1f] overflow-hidden">
+    <div className="relative min-h-screen text-[#1d1d1f] overflow-x-hidden">
       <ReadingProgress />
 
       {/* Background */}

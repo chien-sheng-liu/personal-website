@@ -6,7 +6,6 @@ import { motion, AnimatePresence } from "framer-motion";
 const tocStrings = {
   zh: "目錄",
   en: "On this page",
-  yue: "目錄",
 };
 
 export default function ArticleToc({ toc, locale = "zh" }) {

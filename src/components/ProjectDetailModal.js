@@ -15,7 +15,6 @@ const listItem = {
 const i18n = {
   zh: { highlights: "專案亮點", tech: "技術棧", viewCode: "查看程式碼", metrics: "關鍵指標" },
   en: { highlights: "Highlights", tech: "Tech Stack", viewCode: "View Code", metrics: "Key Metrics" },
-  yue: { highlights: "項目亮點", tech: "技術棧", viewCode: "睇程式碼", metrics: "關鍵指標" },
 };
 
 export default function ProjectDetailModal({ project, locale = "zh", onClose }) {
