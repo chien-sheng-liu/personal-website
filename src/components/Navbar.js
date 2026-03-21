@@ -34,7 +34,7 @@ export default function Navbar() {
   const links = locale === 'en' ? navLinksEn : navLinksZh;
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 16);
+    const onScroll = () => setScrolled(window.scrollY > 40);
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
@@ -56,145 +56,112 @@ export default function Navbar() {
   return (
     <motion.nav
       className="fixed top-0 left-0 right-0 z-50"
-      initial={{ y: -64, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+      initial={{ opacity: 0, y: -8 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
     >
-      {/* Bar */}
+      {/* Backdrop — only on scroll */}
       <div
-        className="transition-all duration-500"
+        className="absolute inset-0 pointer-events-none transition-all duration-500"
         style={{
-          backdropFilter: scrolled ? 'blur(20px)' : 'none',
-          WebkitBackdropFilter: scrolled ? 'blur(20px)' : 'none',
-          background: scrolled ? 'rgba(10,10,10,0.75)' : 'transparent',
+          background: scrolled ? 'rgba(10,10,10,0.85)' : 'transparent',
+          backdropFilter: scrolled ? 'blur(16px)' : 'none',
+          WebkitBackdropFilter: scrolled ? 'blur(16px)' : 'none',
         }}
-      >
-        <div className="mx-auto max-w-5xl px-5 sm:px-8 h-14 flex items-center justify-between">
+      />
 
-          {/* ── Logo ── */}
-          <Link href={hrefPrefix || '/'} className="flex items-center gap-2.5 group shrink-0">
-            <motion.div
-              className="relative w-7 h-7 rounded-[10px] flex items-center justify-center overflow-hidden"
-              style={{ background: 'linear-gradient(135deg, #38bdf8 0%, #6366f1 100%)' }}
-              whileHover={{ scale: 1.08, rotate: -4 }}
-              transition={{ type: 'spring', stiffness: 400, damping: 20 }}
-            >
-              <span className="relative z-10 text-white text-[11px] font-black tracking-tight select-none">ML</span>
-              <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent pointer-events-none" />
-            </motion.div>
-            <div className="flex items-baseline gap-1">
-              <span className="text-sm font-semibold text-white/80 group-hover:text-white transition-colors duration-200">Morris</span>
-              <span className="hidden sm:block text-sm font-light text-white/20 group-hover:text-white/40 transition-colors duration-200">Liu</span>
-            </div>
-          </Link>
+      <div className="relative flex items-center justify-between px-6 sm:px-10 lg:px-16 h-16">
 
-          {/* ── Desktop nav ── */}
-          <div className="hidden md:flex items-stretch h-14">
-            {links.map((link, i) => {
-              const linkHref = normalize(`${hrefPrefix}${link.href}`.replace('//', '/'));
-              const isActive = normalize(pathname || '') === linkHref;
-              return (
-                <motion.div
-                  key={link.href}
-                  initial={{ opacity: 0, y: -8 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.05 + i * 0.06, duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-                  className="relative flex items-center"
-                >
-                  <Link
-                    href={linkHref}
-                    className={`relative flex items-center px-4 h-full text-sm font-medium transition-colors duration-150 ${
-                      isActive ? 'text-white' : 'text-white/35 hover:text-white/80'
-                    }`}
-                  >
-                    {/* Hover bg */}
-                    <span className="absolute inset-x-1 inset-y-2 rounded-lg bg-white/0 hover:bg-white/[0.05] transition-colors duration-150 pointer-events-none" />
-
-                    <span className="relative z-10">{link.name}</span>
-
-                    {/* Active: bottom glow bar */}
-                    {isActive && (
-                      <motion.span
-                        layoutId="nav-glow"
-                        className="absolute bottom-0 left-3 right-3 h-[2px] rounded-full"
-                        style={{
-                          background: 'linear-gradient(90deg, #38bdf8, #818cf8)',
-                          boxShadow: '0 0 8px rgba(56,189,248,0.7)',
-                        }}
-                        transition={{ type: 'spring', bounce: 0.2, duration: 0.5 }}
-                      />
-                    )}
-                  </Link>
-                </motion.div>
-              );
-            })}
+        {/* Logo */}
+        <Link href={hrefPrefix || '/'} className="flex items-center gap-2.5 group">
+          <div
+            className="w-7 h-7 rounded-lg flex items-center justify-center shrink-0"
+            style={{ background: 'linear-gradient(135deg, #38bdf8, #6366f1)' }}
+          >
+            <span className="text-white text-[10px] font-black select-none">ML</span>
           </div>
+          <span className="text-sm font-semibold text-white/80 group-hover:text-white transition-colors">
+            Morris Liu
+          </span>
+        </Link>
 
-          {/* ── Right side ── */}
-          <div className="flex items-center gap-1 shrink-0">
-
-            {/* Language toggle */}
-            <div className="flex items-center text-[11px] font-semibold tracking-wide">
-              <button
-                onClick={() => switchTo('zh')}
-                className={`px-2.5 py-1.5 rounded-md transition-colors duration-150 ${
-                  locale === 'zh' ? 'text-white' : 'text-white/25 hover:text-white/60'
-                }`}
+        {/* Desktop links */}
+        <div className="hidden md:flex items-center gap-6">
+          {links.map((link, i) => {
+            const linkHref = normalize(`${hrefPrefix}${link.href}`.replace('//', '/'));
+            const isActive = normalize(pathname || '') === linkHref;
+            return (
+              <motion.div
+                key={link.href}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.1 + i * 0.05 }}
               >
-                繁中
-              </button>
-              <span className="text-white/10 select-none">·</span>
-              <button
-                onClick={() => switchTo('en')}
-                className={`px-2.5 py-1.5 rounded-md transition-colors duration-150 ${
-                  locale === 'en' ? 'text-white' : 'text-white/25 hover:text-white/60'
-                }`}
-              >
-                EN
-              </button>
-            </div>
+                <Link
+                  href={linkHref}
+                  className={`relative text-sm font-medium transition-colors duration-200 ${
+                    isActive ? 'text-white' : 'text-white/55 hover:text-white/90'
+                  }`}
+                >
+                  {link.name}
+                  {isActive && (
+                    <motion.span
+                      layoutId="underline"
+                      className="absolute -bottom-0.5 left-0 right-0 h-px bg-sky-400"
+                      style={{ boxShadow: '0 0 6px rgba(56,189,248,0.8)' }}
+                      transition={{ type: 'spring', bounce: 0.2, duration: 0.4 }}
+                    />
+                  )}
+                </Link>
+              </motion.div>
+            );
+          })}
 
-            {/* Mobile hamburger */}
+          {/* Lang */}
+          <div className="flex items-center gap-1 text-sm font-medium ml-2">
             <button
-              onClick={() => setIsOpen(v => !v)}
-              className="md:hidden w-8 h-8 flex flex-col items-center justify-center gap-[5px] rounded-lg hover:bg-white/[0.06] transition-colors ml-1"
-              aria-label="Toggle menu"
+              onClick={() => switchTo('zh')}
+              className={`transition-colors ${locale === 'zh' ? 'text-white' : 'text-white/35 hover:text-white/70'}`}
             >
-              <motion.span
-                className="block rounded-full bg-white/60"
-                style={{ width: '16px', height: '1.5px' }}
-                animate={isOpen ? { rotate: 45, y: 6.5 } : { rotate: 0, y: 0 }}
-                transition={{ duration: 0.22 }}
-              />
-              <motion.span
-                className="block rounded-full bg-white/60"
-                style={{ width: '16px', height: '1.5px' }}
-                animate={isOpen ? { opacity: 0, scaleX: 0 } : { opacity: 1, scaleX: 1 }}
-                transition={{ duration: 0.22 }}
-              />
-              <motion.span
-                className="block rounded-full bg-white/60"
-                style={{ width: '16px', height: '1.5px' }}
-                animate={isOpen ? { rotate: -45, y: -6.5 } : { rotate: 0, y: 0 }}
-                transition={{ duration: 0.22 }}
-              />
+              繁中
+            </button>
+            <span className="text-white/20">·</span>
+            <button
+              onClick={() => switchTo('en')}
+              className={`transition-colors ${locale === 'en' ? 'text-white' : 'text-white/35 hover:text-white/70'}`}
+            >
+              EN
             </button>
           </div>
         </div>
+
+        {/* Mobile hamburger */}
+        <button
+          onClick={() => setIsOpen(v => !v)}
+          className="md:hidden flex flex-col items-center justify-center gap-1.5 w-8 h-8"
+          aria-label="Toggle menu"
+        >
+          <motion.span className="block h-px w-5 bg-white/70 rounded-full"
+            animate={isOpen ? { rotate: 45, y: 5 } : { rotate: 0, y: 0 }} transition={{ duration: 0.2 }} />
+          <motion.span className="block h-px w-5 bg-white/70 rounded-full"
+            animate={isOpen ? { opacity: 0 } : { opacity: 1 }} transition={{ duration: 0.2 }} />
+          <motion.span className="block h-px w-5 bg-white/70 rounded-full"
+            animate={isOpen ? { rotate: -45, y: -5 } : { rotate: 0, y: 0 }} transition={{ duration: 0.2 }} />
+        </button>
       </div>
 
-      {/* ── Mobile dropdown ── */}
+      {/* Mobile menu */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -8, scale: 0.97 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: -8, scale: 0.97 }}
-            transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
-            className="md:hidden mx-4 sm:mx-6 mt-1 rounded-2xl border border-white/[0.08] overflow-hidden"
-            style={{ background: '#0d0d0d', boxShadow: '0 20px 60px rgba(0,0,0,0.8)' }}
+            initial={{ opacity: 0, y: -6 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -6 }}
+            transition={{ duration: 0.2 }}
+            className="md:hidden mx-4 rounded-xl border border-white/[0.08] overflow-hidden"
+            style={{ background: 'rgba(12,12,12,0.96)', backdropFilter: 'blur(20px)' }}
           >
-            <div className="p-2 flex flex-col gap-0.5">
+            <div className="p-2 flex flex-col">
               {links.map((link) => {
                 const linkHref = normalize(`${hrefPrefix}${link.href}`.replace('//', '/'));
                 const isActive = normalize(pathname || '') === linkHref;
@@ -203,39 +170,21 @@ export default function Navbar() {
                     key={link.href}
                     href={linkHref}
                     onClick={() => setIsOpen(false)}
-                    className={`relative px-4 py-3 rounded-xl text-sm font-medium transition-colors ${
-                      isActive ? 'text-white' : 'text-white/40 hover:text-white/75'
+                    className={`px-4 py-3 rounded-lg text-sm font-medium transition-colors ${
+                      isActive ? 'text-white bg-white/[0.06]' : 'text-white/50 hover:text-white/80'
                     }`}
                   >
-                    {isActive && (
-                      <>
-                        <span className="absolute inset-0 rounded-xl bg-white/[0.06] pointer-events-none" />
-                        <span
-                          className="absolute left-0 inset-y-2 w-[2px] rounded-full"
-                          style={{ background: 'linear-gradient(180deg, #38bdf8, #818cf8)', boxShadow: '0 0 6px rgba(56,189,248,0.6)' }}
-                        />
-                      </>
-                    )}
-                    <span className="relative z-10">{link.name}</span>
+                    {link.name}
                   </Link>
                 );
               })}
-
-              <div className="mt-1 pt-2 border-t border-white/[0.06] flex gap-1 px-1">
-                <button
-                  onClick={() => switchTo('zh')}
-                  className={`flex-1 py-2 rounded-lg text-xs font-semibold transition-colors ${
-                    locale === 'zh' ? 'bg-white/[0.08] text-white' : 'text-white/30 hover:text-white/60'
-                  }`}
-                >
+              <div className="mt-1 pt-2 border-t border-white/[0.06] flex gap-1 px-2 pb-1">
+                <button onClick={() => switchTo('zh')}
+                  className={`flex-1 py-2 rounded-lg text-sm font-medium transition-colors ${locale === 'zh' ? 'text-white bg-white/[0.07]' : 'text-white/35 hover:text-white/60'}`}>
                   繁中
                 </button>
-                <button
-                  onClick={() => switchTo('en')}
-                  className={`flex-1 py-2 rounded-lg text-xs font-semibold transition-colors ${
-                    locale === 'en' ? 'bg-white/[0.08] text-white' : 'text-white/30 hover:text-white/60'
-                  }`}
-                >
+                <button onClick={() => switchTo('en')}
+                  className={`flex-1 py-2 rounded-lg text-sm font-medium transition-colors ${locale === 'en' ? 'text-white bg-white/[0.07]' : 'text-white/35 hover:text-white/60'}`}>
                   EN
                 </button>
               </div>

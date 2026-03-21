@@ -26,7 +26,10 @@
       "Bash(NEXT_PUBLIC_BASE_PATH=/personal-website NODE_OPTIONS=\"--max-old-space-size=4096\" npm run build)",
       "WebFetch(domain:godly.website)",
       "WebFetch(domain:daria-izbash.com)",
-      "WebFetch(domain:www.dariaizbash.com)"
+      "WebFetch(domain:www.dariaizbash.com)",
+      "WebFetch(domain:joebermudez.com)",
+      "WebSearch",
+      "WebFetch(domain:www.awwwards.com)"
     ]
   }
 }
