@@ -6,13 +6,11 @@ import {
   FaGithub,
   FaArrowRight,
   FaDatabase,
-  FaCode,
   FaBrain,
   FaCloud,
   FaChartLine,
 } from "react-icons/fa";
 import { getProjectData } from "@/data/projectData";
-import AnimatedGradientBg from "./AnimatedGradientBg";
 import ProjectDetailModal from "./ProjectDetailModal";
 
 /* ── i18n ── */
@@ -41,15 +39,6 @@ const i18n = {
     ctaBtn: "View GitHub",
     updating: "Continuously updating",
   },
-};
-
-const iconForCategory = (cat) => {
-  const c = (cat || "").toLowerCase();
-  if (c.includes("llm")) return <FaDatabase size={24} />;
-  if (c.includes("nlp")) return <FaBrain size={24} />;
-  if (c.includes("deep") || c.includes("learning")) return <FaBrain size={24} />;
-  if (c.includes("cloud")) return <FaCloud size={24} />;
-  return <FaChartLine size={24} />;
 };
 
 const fadeUp = {
@@ -83,8 +72,7 @@ export default function ProjectsPage({ locale = "zh" }) {
   );
 
   return (
-    <div className="relative min-h-screen text-[#1d1d1f] overflow-hidden">
-      <AnimatedGradientBg variant="hero" />
+    <div className="relative min-h-screen bg-[#0a0a0a] text-white overflow-hidden">
 
       <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-24">
         <div className="max-w-5xl mx-auto">
@@ -94,7 +82,7 @@ export default function ProjectsPage({ locale = "zh" }) {
             <motion.p
               variants={fadeUp}
               custom={0}
-              className="text-xs uppercase tracking-[0.35em] text-indigo-500/70 font-medium mb-4"
+              className="text-xs uppercase tracking-[0.35em] text-indigo-400/70 font-medium mb-4"
             >
               {t.tagline}
             </motion.p>
@@ -103,14 +91,14 @@ export default function ProjectsPage({ locale = "zh" }) {
               custom={1}
               className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.1] tracking-tight mb-5"
             >
-              <span className="bg-gradient-to-r from-violet-500 via-sky-500 to-cyan-400 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-violet-400 via-sky-400 to-cyan-300 bg-clip-text text-transparent">
                 {t.title}
               </span>
             </motion.h1>
             <motion.p
               variants={fadeUp}
               custom={2}
-              className="text-lg text-slate-500 leading-relaxed max-w-2xl"
+              className="text-lg text-white/50 leading-relaxed max-w-2xl"
             >
               {t.desc}
             </motion.p>
@@ -129,8 +117,8 @@ export default function ProjectsPage({ locale = "zh" }) {
               onClick={() => setActiveFilter(null)}
               className={`px-4 py-1.5 rounded-full text-sm font-medium border transition-all duration-200 cursor-pointer ${
                 activeFilter === null
-                  ? "bg-[#1d1d1f] text-white border-[#1d1d1f] shadow-sm"
-                  : "bg-white/70 text-slate-500 border-slate-200/60 hover:border-slate-300 hover:text-slate-700"
+                  ? "bg-white text-[#0a0a0a] border-white shadow-sm"
+                  : "bg-white/[0.05] text-white/50 border-white/[0.08] hover:border-white/20 hover:text-white/80"
               }`}
             >
               {t.all}
@@ -142,8 +130,8 @@ export default function ProjectsPage({ locale = "zh" }) {
                 onClick={() => setActiveFilter(activeFilter === cat ? null : cat)}
                 className={`px-4 py-1.5 rounded-full text-sm font-medium border transition-all duration-200 cursor-pointer ${
                   activeFilter === cat
-                    ? "bg-[#1d1d1f] text-white border-[#1d1d1f] shadow-sm"
-                    : "bg-white/70 text-slate-500 border-slate-200/60 hover:border-slate-300 hover:text-slate-700"
+                    ? "bg-white text-[#0a0a0a] border-white shadow-sm"
+                    : "bg-white/[0.05] text-white/50 border-white/[0.08] hover:border-white/20 hover:text-white/80"
                 }`}
               >
                 {cat}
@@ -160,7 +148,7 @@ export default function ProjectsPage({ locale = "zh" }) {
             viewport={{ once: true, amount: 0.1 }}
           >
             <AnimatePresence mode="popLayout">
-            {filteredProjects.map((project, idx) => (
+            {filteredProjects.map((project) => (
               <motion.div
                 key={project.title}
                 layout
@@ -168,7 +156,7 @@ export default function ProjectsPage({ locale = "zh" }) {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.95 }}
                 transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-                className="group relative overflow-hidden rounded-2xl bg-white/70 backdrop-blur-sm border border-slate-200/60 shadow-sm hover:border-slate-300 hover:shadow-md transition-all duration-300 cursor-pointer"
+                className="group relative overflow-hidden rounded-2xl bg-white/[0.05] backdrop-blur-sm border border-white/[0.08] hover:border-white/20 hover:shadow-lg hover:shadow-black/20 transition-all duration-300 cursor-pointer"
                 onClick={() => setSelectedProject(project)}
               >
                 {/* Accent strip */}
@@ -186,19 +174,19 @@ export default function ProjectsPage({ locale = "zh" }) {
                     </div>
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2 mb-1">
-                        <span className="text-sky-500">{project.categoryIcon}</span>
-                        <span className="text-xs font-semibold text-sky-500 uppercase tracking-wide">
+                        <span className="text-sky-400">{project.categoryIcon}</span>
+                        <span className="text-xs font-semibold text-sky-400 uppercase tracking-wide">
                           {project.category}
                         </span>
                       </div>
-                      <h3 className="text-lg font-bold text-[#1d1d1f] leading-snug group-hover:text-sky-600 transition-colors">
+                      <h3 className="text-lg font-bold text-white leading-snug group-hover:text-sky-400 transition-colors">
                         {project.title}
                       </h3>
                     </div>
                   </div>
 
                   {/* Description */}
-                  <p className="text-sm text-slate-500 leading-relaxed mb-4">
+                  <p className="text-sm text-white/50 leading-relaxed mb-4">
                     {project.description}
                   </p>
 
@@ -207,7 +195,7 @@ export default function ProjectsPage({ locale = "zh" }) {
                     {project.technologies.map((tech, i) => (
                       <span
                         key={i}
-                        className="px-2.5 py-0.5 bg-slate-100 border border-slate-200/80 rounded-full text-[11px] font-medium text-slate-500"
+                        className="px-2.5 py-0.5 bg-white/[0.05] border border-white/[0.08] rounded-full text-[11px] font-medium text-white/50"
                       >
                         {tech}
                       </span>
@@ -217,15 +205,15 @@ export default function ProjectsPage({ locale = "zh" }) {
                   {/* Metrics */}
                   <div className="flex gap-3 mb-5">
                     {project.metrics.map((m, i) => (
-                      <div key={i} className="flex-1 text-center py-2.5 bg-slate-50/80 rounded-lg border border-slate-100">
-                        <div className="text-base font-bold text-[#1d1d1f]">{m.value}</div>
-                        <div className="text-[10px] text-slate-400 mt-0.5">{m.label}</div>
+                      <div key={i} className="flex-1 text-center py-2.5 bg-white/[0.05] rounded-lg border border-white/[0.08]">
+                        <div className="text-base font-bold text-white">{m.value}</div>
+                        <div className="text-[10px] text-white/40 mt-0.5">{m.label}</div>
                       </div>
                     ))}
                   </div>
 
                   {/* Action */}
-                  <span className="inline-flex items-center gap-2 text-sm font-semibold text-sky-600 group-hover:text-sky-700 transition-colors">
+                  <span className="inline-flex items-center gap-2 text-sm font-semibold text-sky-400 group-hover:text-sky-300 transition-colors">
                     {t.viewDetail}
                     <FaArrowRight className="text-[10px] group-hover:translate-x-1 transition-transform" />
                   </span>
@@ -242,10 +230,10 @@ export default function ProjectsPage({ locale = "zh" }) {
             whileInView="visible"
             viewport={{ once: true }}
           >
-            <motion.h3 variants={fadeUp} custom={0} className="text-2xl font-bold text-[#1d1d1f] mb-3">
+            <motion.h3 variants={fadeUp} custom={0} className="text-2xl font-bold text-white mb-3">
               {t.ctaTitle}
             </motion.h3>
-            <motion.p variants={fadeUp} custom={1} className="text-slate-500 mb-6 max-w-lg mx-auto">
+            <motion.p variants={fadeUp} custom={1} className="text-white/50 mb-6 max-w-lg mx-auto">
               {t.ctaDesc}
             </motion.p>
             <motion.div variants={fadeUp} custom={2} className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -253,13 +241,13 @@ export default function ProjectsPage({ locale = "zh" }) {
                 href="https://github.com/chien-sheng-liu"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2.5 px-6 py-3 bg-[#1d1d1f] text-white font-semibold rounded-full hover:bg-slate-800 transition-colors shadow-lg"
+                className="inline-flex items-center gap-2.5 px-6 py-3 bg-white text-[#0a0a0a] font-semibold rounded-full hover:bg-white/90 transition-colors shadow-lg"
               >
                 <FaGithub />
                 {t.ctaBtn}
                 <FaArrowRight className="text-xs" />
               </a>
-              <span className="flex items-center gap-2 text-sm text-slate-400">
+              <span className="flex items-center gap-2 text-sm text-white/40">
                 <span className="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse" />
                 {t.updating}
               </span>

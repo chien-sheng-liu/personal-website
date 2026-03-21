@@ -20,7 +20,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="zh-TW" suppressHydrationWarning>
-      <body className="bg-[#f5f5f7] text-[#1d1d1f] antialiased">
+      <body className="bg-[#0a0a0a] text-white antialiased">
         <ThemeProvider>
           <LangDetect />
           <CursorGlow />

@@ -98,9 +98,9 @@ const events = [
     year: "2017", title: "Software Engineer Intern", org: "Mitac", flag: "🇨🇳", type: "work",
     loc: "昆山", locFull: "China", duration: "2017.07 – 2017.09",
     detail: [
-      "開發 C#/.NET 後端並整合 WeChat API 的會議安排系統",
-      "設計 workflow 讓差旅報銷效率提升 25%",
-      "訪談 10+ 使用者，將需求轉成系統設計/測試",
+      "維護 C++ 嵌入式模組並撰寫測試案例",
+      "協助 QA 流程，記錄並追蹤缺陷至修復",
+      "參與每日站會與 sprint review，熟悉敏捷開發",
     ],
   },
   {
@@ -120,8 +120,8 @@ const typeStyle = {
     accent: "from-sky-400 to-cyan-500",
     accentText: "text-sky-600",
     accentBg: "bg-sky-500",
-    cardBg: "bg-white/85",
-    glow: "hover:shadow-xl hover:shadow-sky-200/30 hover:-translate-y-1",
+    cardBg: "bg-white/92",
+    glow: "hover:shadow-xl hover:shadow-sky-400/20 hover:-translate-y-1",
     badge: "bg-sky-100 text-sky-600",
     dot: "bg-sky-400",
     strip: "from-sky-400 to-cyan-500",
@@ -131,8 +131,8 @@ const typeStyle = {
     accent: "from-amber-400 to-orange-500",
     accentText: "text-amber-600",
     accentBg: "bg-amber-500",
-    cardBg: "bg-white/85",
-    glow: "hover:shadow-xl hover:shadow-amber-200/30 hover:-translate-y-1",
+    cardBg: "bg-white/92",
+    glow: "hover:shadow-xl hover:shadow-amber-400/20 hover:-translate-y-1",
     badge: "bg-amber-100 text-amber-600",
     dot: "bg-amber-400",
     strip: "from-amber-400 to-orange-500",
@@ -140,11 +140,13 @@ const typeStyle = {
   },
 };
 
-const AUTO_SCROLL_SPEED = 60;
 const CARD_W = 520;
 const CARD_H = 220;
 const GAP = 40;
 const PAD = 48;
+const AUTO_SCROLL_SPEED = 55;
+const HOVER_MAX_SPEED = 220;
+const EDGE_ZONE = 0.18;
 
 /* ── Fake barcode bars (deterministic) ── */
 function BarcodeSVG({ width = 100, height = 20 }) {
@@ -172,6 +174,7 @@ export default function FlightTimeline() {
   const [dragConstraint, setDragConstraint] = useState(0);
   const isDragging = useRef(false);
   const isHovering = useRef(false);
+  const hoverVelocity = useRef(0);
 
   const openModal = useCallback((ev) => setSelected(ev), []);
   const closeModal = useCallback(() => setSelected(null), []);
@@ -197,25 +200,56 @@ export default function FlightTimeline() {
     return () => window.removeEventListener("resize", calc);
   }, []);
 
+  /* Combined auto-scroll + hover-edge-scroll RAF */
   useEffect(() => {
     if (dragConstraint >= 0) return;
     let lastTime = performance.now();
-    let direction = -1;
+    let autoDir = -1; // -1 = scroll right (dragX decreases), 1 = scroll left
     let rafId;
     function tick(now) {
       rafId = requestAnimationFrame(tick);
-      if (isDragging.current || isHovering.current) { lastTime = now; return; }
-      const dt = (now - lastTime) / 1000;
+      if (isDragging.current) { lastTime = now; return; }
+      const dt = Math.min((now - lastTime) / 1000, 0.05);
       lastTime = now;
       const current = dragX.get();
-      let next = current + direction * AUTO_SCROLL_SPEED * dt;
-      if (next <= dragConstraint) { next = dragConstraint; direction = 1; }
-      else if (next >= 0) { next = 0; direction = -1; }
-      dragX.set(next);
+
+      if (isHovering.current) {
+        // Near edge: hover-speed scroll; center: pause
+        const vel = hoverVelocity.current;
+        if (vel === 0) return;
+        let next = current - vel * HOVER_MAX_SPEED * dt;
+        next = Math.max(dragConstraint, Math.min(0, next));
+        dragX.set(next);
+      } else {
+        // Auto-scroll bounce
+        let next = current + autoDir * AUTO_SCROLL_SPEED * dt;
+        if (next <= dragConstraint) { next = dragConstraint; autoDir = 1; }
+        else if (next >= 0) { next = 0; autoDir = -1; }
+        dragX.set(next);
+      }
     }
     rafId = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(rafId);
   }, [dragConstraint, dragX]);
+
+  const handleMouseMove = useCallback((e) => {
+    if (!containerRef.current) return;
+    isHovering.current = true;
+    const rect = containerRef.current.getBoundingClientRect();
+    const relX = (e.clientX - rect.left) / rect.width;
+    if (relX < EDGE_ZONE) {
+      hoverVelocity.current = -(1 - relX / EDGE_ZONE);
+    } else if (relX > 1 - EDGE_ZONE) {
+      hoverVelocity.current = (relX - (1 - EDGE_ZONE)) / EDGE_ZONE;
+    } else {
+      hoverVelocity.current = 0;
+    }
+  }, []);
+
+  const handleMouseLeave = useCallback(() => {
+    isHovering.current = false;
+    hoverVelocity.current = 0;
+  }, []);
 
   const progressWidth = useTransform(dragX, [0, dragConstraint || -1], ["0%", "100%"]);
 
@@ -229,28 +263,20 @@ export default function FlightTimeline() {
             initial={{ opacity: 0, y: 8 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="inline-flex items-center gap-2.5 rounded-full bg-sky-50 border border-sky-200/60 px-4 py-1.5 mb-5"
+            className="inline-flex items-center gap-2.5 rounded-full bg-sky-500/10 border border-sky-500/20 px-4 py-1.5 mb-5"
           >
-            <FaPlane className="text-[10px] text-sky-500 -rotate-12" />
-            <span className="text-[10px] uppercase tracking-[0.4em] text-sky-600 font-semibold">Flight Log</span>
+            <FaPlane className="text-[10px] text-sky-400 -rotate-12" />
+            <span className="text-[10px] uppercase tracking-[0.4em] text-sky-400 font-semibold">Flight Log</span>
           </motion.div>
           <motion.h2
             initial={{ opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.08 }}
-            className="text-3xl sm:text-4xl font-bold mb-3 text-[#1d1d1f]"
+            className="text-3xl sm:text-4xl font-bold mb-3 bg-gradient-to-r from-violet-400 via-sky-400 to-cyan-300 bg-clip-text text-transparent"
           >
             人生航線
           </motion.h2>
-          <motion.p
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.15 }}
-            className="text-sm text-slate-400"
-          >
-          </motion.p>
         </div>
       </div>
 
@@ -259,12 +285,12 @@ export default function FlightTimeline() {
         className="group/timeline relative overflow-hidden"
         style={{ height: "clamp(380px, 45vh, 480px)" }}
       >
-        {/* ── World map — prominent, slightly oversized for immersion ── */}
+        {/* ── World map ── */}
         <div className="absolute pointer-events-none opacity-[0.9]" style={{ inset: "-20% -10%", width: "120%", height: "140%" }}>
           <WorldMapBackground />
         </div>
 
-        {/* ── Warm atmospheric glow ── */}
+        {/* ── Atmospheric glow ── */}
         <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse at 25% 45%, rgba(14,165,233,0.07) 0%, transparent 55%), radial-gradient(ellipse at 75% 35%, rgba(245,158,11,0.06) 0%, transparent 55%)" }} />
 
         {/* ── Drag container ── */}
@@ -272,7 +298,8 @@ export default function FlightTimeline() {
           ref={containerRef}
           className="relative h-full overflow-hidden"
           onMouseEnter={() => { isHovering.current = true; }}
-          onMouseLeave={() => { isHovering.current = false; }}
+          onMouseMove={handleMouseMove}
+          onMouseLeave={handleMouseLeave}
         >
           <motion.div
             ref={innerRef}
@@ -315,7 +342,7 @@ export default function FlightTimeline() {
                   key={idx}
                   initial={{ opacity: 0, y: isAbove ? -30 : 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.3 }}
+                  viewport={{ once: true, amount: 0.3, root: containerRef }}
                   transition={{ duration: 0.5, delay: idx * 0.04, ease: [0.22, 1, 0.36, 1] }}
                   className="flex-shrink-0 flex flex-col items-center relative"
                   style={{
@@ -327,12 +354,12 @@ export default function FlightTimeline() {
 
                     <div className="flex-1 min-h-[16px]" />
 
-                    {/* ═══ Boarding Pass Card — landscape 20:8 ═══ */}
+                    {/* ═══ Boarding Pass Card ═══ */}
                     <button
                       type="button"
                       onClick={() => { if (!isDragging.current) openModal(ev); }}
                       className={`group relative overflow-hidden ${s.cardBg} backdrop-blur-md shadow-lg ${s.glow} transition-all duration-300 cursor-pointer text-left flex`}
-                      style={{ borderRadius: "12px", border: "1px solid rgba(0,0,0,0.06)", width: `${CARD_W}px`, height: `${CARD_H}px` }}
+                      style={{ borderRadius: "12px", border: "1px solid rgba(255,255,255,0.15)", width: `${CARD_W}px`, height: `${CARD_H}px` }}
                     >
                       {/* ── Left: accent strip ── */}
                       <div className={`w-[6px] shrink-0 bg-gradient-to-b ${s.strip}`} />
@@ -392,8 +419,8 @@ export default function FlightTimeline() {
                       {/* ── Vertical perforation ── */}
                       <div className="relative w-0 shrink-0">
                         <div className="absolute inset-y-0 left-0 border-l border-dashed border-slate-200" />
-                        <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-[#f5f5f7]" />
-                        <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-[#f5f5f7]" />
+                        <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-[#0a0a0a]" />
+                        <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-[#0a0a0a]" />
                       </div>
 
                       {/* ── Right stub (~30%) ── */}
@@ -412,7 +439,7 @@ export default function FlightTimeline() {
 
                     {/* ── Timeline dot ── */}
                     <div className="relative flex-shrink-0 z-10">
-                      <div className={`w-4 h-4 rounded-full ${s.dot} ring-4 ring-[#f5f5f7] shadow-md`} />
+                      <div className={`w-4 h-4 rounded-full ${s.dot} ring-4 ring-[#0a0a0a] shadow-md`} />
                     </div>
 
                     <div className="w-px h-5 opacity-0" />
@@ -423,29 +450,29 @@ export default function FlightTimeline() {
             })}
           </motion.div>
 
-          {/* Edge fades */}
-          <div className="absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-[#f5f5f7] to-transparent pointer-events-none z-10" />
-          <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-[#f5f5f7] to-transparent pointer-events-none z-10" />
+          {/* Edge fades — match dark background */}
+          <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-[#0a0a0a] to-transparent pointer-events-none z-10" />
+          <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-[#0a0a0a] to-transparent pointer-events-none z-10" />
 
-          {/* Arrow buttons — subtle, appear on hover */}
+          {/* Arrow buttons */}
           <button
             type="button"
             onClick={() => scrollBy(1)}
-            className="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-8 h-8 rounded-full bg-white/50 backdrop-blur-sm border border-white/60 flex items-center justify-center text-slate-400 opacity-0 hover:opacity-100 hover:bg-white/80 hover:text-slate-600 hover:shadow-md group-hover/timeline:opacity-60 transition-all duration-300 cursor-pointer"
+            className="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-8 h-8 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center text-white/50 opacity-0 hover:opacity-100 hover:bg-white/20 hover:text-white hover:shadow-md group-hover/timeline:opacity-60 transition-all duration-300 cursor-pointer"
           >
             <FaChevronLeft className="text-[10px]" />
           </button>
           <button
             type="button"
             onClick={() => scrollBy(-1)}
-            className="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-8 h-8 rounded-full bg-white/50 backdrop-blur-sm border border-white/60 flex items-center justify-center text-slate-400 opacity-0 hover:opacity-100 hover:bg-white/80 hover:text-slate-600 hover:shadow-md group-hover/timeline:opacity-60 transition-all duration-300 cursor-pointer"
+            className="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-8 h-8 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center text-white/50 opacity-0 hover:opacity-100 hover:bg-white/20 hover:text-white hover:shadow-md group-hover/timeline:opacity-60 transition-all duration-300 cursor-pointer"
           >
             <FaChevronRight className="text-[10px]" />
           </button>
         </div>
 
         {/* Progress bar */}
-        <div className="absolute bottom-0 left-0 right-0 h-[3px] bg-slate-200/30">
+        <div className="absolute bottom-0 left-0 right-0 h-[3px] bg-white/10">
           <motion.div
             className="h-full bg-gradient-to-r from-sky-400 to-amber-400 rounded-full"
             style={{ width: progressWidth }}
@@ -471,6 +498,12 @@ function DetailModal({ ev, s, onClose }) {
   const flightNo = `ML-${String(events.length - idx).padStart(3, "0")}`;
   const airline = ev.type === "work" ? "Career Airlines" : "Edu Airlines";
 
+  useEffect(() => {
+    const handler = (e) => { if (e.key === "Escape") onClose(); };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, [onClose]);
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -480,14 +513,14 @@ function DetailModal({ ev, s, onClose }) {
       className="fixed inset-0 z-50 flex items-center justify-center px-4"
       onClick={onClose}
     >
-      <div className="absolute inset-0 bg-black/20 backdrop-blur-sm" />
+      <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
 
       <motion.div
         initial={{ opacity: 0, scale: 0.92 }}
         animate={{ opacity: 1, scale: 1 }}
         exit={{ opacity: 0, scale: 0.92 }}
         transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-        className="relative w-full max-w-3xl overflow-hidden bg-white shadow-2xl shadow-slate-400/20 text-[#1d1d1f] flex flex-col sm:flex-row"
+        className="relative w-full max-w-3xl overflow-hidden bg-white shadow-2xl shadow-black/60 text-[#1d1d1f] flex flex-col sm:flex-row"
         style={{ borderRadius: "16px" }}
         onClick={(e) => e.stopPropagation()}
       >
@@ -559,8 +592,8 @@ function DetailModal({ ev, s, onClose }) {
             {/* Perforation */}
             <div className="relative my-3">
               <div className="border-t border-dashed border-slate-200" />
-              <div className="absolute -left-7 top-1/2 -translate-y-1/2 w-4 h-4 rounded-full bg-[#f5f5f7]" />
-              <div className="absolute -right-7 top-1/2 -translate-y-1/2 w-4 h-4 rounded-full bg-[#f5f5f7]" />
+              <div className="absolute -left-7 top-1/2 -translate-y-1/2 w-4 h-4 rounded-full bg-white" />
+              <div className="absolute -right-7 top-1/2 -translate-y-1/2 w-4 h-4 rounded-full bg-white" />
             </div>
 
             <div className="text-[8px] uppercase tracking-wider text-slate-400 mb-2">Flight Log</div>
@@ -584,8 +617,8 @@ function DetailModal({ ev, s, onClose }) {
         {/* ══ Vertical perforation ══ */}
         <div className="hidden sm:block relative w-0 shrink-0">
           <div className="absolute inset-y-0 left-0 border-l border-dashed border-slate-200" />
-          <div className="absolute -top-2.5 left-1/2 -translate-x-1/2 w-5 h-5 rounded-full bg-[#f5f5f7]" />
-          <div className="absolute -bottom-2.5 left-1/2 -translate-x-1/2 w-5 h-5 rounded-full bg-[#f5f5f7]" />
+          <div className="absolute -top-2.5 left-1/2 -translate-x-1/2 w-5 h-5 rounded-full bg-white" />
+          <div className="absolute -bottom-2.5 left-1/2 -translate-x-1/2 w-5 h-5 rounded-full bg-white" />
         </div>
 
         {/* ══ RIGHT: Stub section ══ */}

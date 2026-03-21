@@ -8,7 +8,6 @@ import {
   FaGlobe,
   FaArrowRight,
 } from "react-icons/fa";
-import AnimatedGradientBg from "./AnimatedGradientBg";
 
 const TO_EMAIL = "liu_chiensheng@outlook.com";
 const CALENDAR_URL = "https://calendar.app.google/MANJXP2ZZiaWF5T26";
@@ -83,7 +82,7 @@ const i18n = {
         label: "Book a call",
         subtitle: "30 min · Google Calendar",
         value: "Pick a time that works for you",
-        href: "CALENDAR_URL",
+        href: CALENDAR_URL,
         color: "#16a34a",
       },
     ],
@@ -104,23 +103,17 @@ export default function ContactPage({ locale = "zh" }) {
   const t = i18n[locale] || i18n.zh;
 
   return (
-    <div className="relative min-h-screen text-[#1d1d1f] overflow-hidden">
-      {/* Background */}
-      <AnimatedGradientBg variant="hero" />
+    <div className="relative min-h-screen bg-[#0a0a0a] text-white overflow-hidden">
 
       <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-24">
         <div className="max-w-2xl mx-auto">
 
           {/* ── Hero ── */}
-          <motion.div
-            className="mb-16"
-            initial="hidden"
-            animate="visible"
-          >
+          <motion.div className="mb-16" initial="hidden" animate="visible">
             <motion.p
               variants={fadeUp}
               custom={0}
-              className="text-xs uppercase tracking-[0.35em] text-indigo-500/70 font-medium mb-4"
+              className="text-xs uppercase tracking-[0.35em] text-indigo-400/70 font-medium mb-4"
             >
               {t.tagline}
             </motion.p>
@@ -129,14 +122,14 @@ export default function ContactPage({ locale = "zh" }) {
               custom={1}
               className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.1] tracking-tight mb-5"
             >
-              <span className="bg-gradient-to-r from-violet-500 via-sky-500 to-cyan-400 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-violet-400 via-sky-400 to-cyan-300 bg-clip-text text-transparent">
                 {t.heroTitle}
               </span>
             </motion.h1>
             <motion.p
               variants={fadeUp}
               custom={2}
-              className="text-lg text-slate-500 leading-relaxed mb-6"
+              className="text-lg text-white/50 leading-relaxed mb-6"
             >
               {t.heroDesc}
             </motion.p>
@@ -145,15 +138,15 @@ export default function ContactPage({ locale = "zh" }) {
             <motion.div
               variants={fadeUp}
               custom={3}
-              className="flex flex-wrap gap-3 text-sm text-slate-400"
+              className="flex flex-wrap gap-3 text-sm text-white/40"
             >
               <span className="inline-flex items-center gap-1.5">
-                <FaMapMarkerAlt className="text-xs text-sky-500" />
+                <FaMapMarkerAlt className="text-xs text-sky-400" />
                 {t.location}
               </span>
-              <span className="text-slate-200">·</span>
+              <span className="text-white/20">·</span>
               <span className="inline-flex items-center gap-1.5">
-                <FaGlobe className="text-xs text-sky-500" />
+                <FaGlobe className="text-xs text-sky-400" />
                 {t.languages}
               </span>
             </motion.div>
@@ -172,7 +165,7 @@ export default function ContactPage({ locale = "zh" }) {
                 viewport={{ once: true, amount: 0.5 }}
                 custom={i}
                 variants={fadeUp}
-                className="group flex items-center gap-5 p-5 rounded-2xl bg-white/70 backdrop-blur-sm border border-slate-200/60 shadow-sm hover:border-slate-300 hover:shadow-md transition-all duration-300"
+                className="group flex items-center gap-5 p-5 rounded-2xl bg-white/[0.05] backdrop-blur-sm border border-white/[0.08] hover:border-white/20 hover:shadow-lg hover:shadow-black/20 transition-all duration-300"
               >
                 {/* Icon */}
                 <div
@@ -185,16 +178,16 @@ export default function ContactPage({ locale = "zh" }) {
                 {/* Text */}
                 <div className="flex-1 min-w-0">
                   <div className="flex items-baseline gap-2">
-                    <h3 className="text-base font-bold text-[#1d1d1f] group-hover:text-sky-600 transition-colors">
+                    <h3 className="text-base font-bold text-white group-hover:text-sky-400 transition-colors">
                       {ch.label}
                     </h3>
-                    <span className="text-xs text-slate-400">{ch.subtitle}</span>
+                    <span className="text-xs text-white/40">{ch.subtitle}</span>
                   </div>
-                  <p className="text-sm text-slate-500 truncate mt-0.5">{ch.value}</p>
+                  <p className="text-sm text-white/50 truncate mt-0.5">{ch.value}</p>
                 </div>
 
                 {/* Arrow */}
-                <FaArrowRight className="flex-shrink-0 text-xs text-slate-300 group-hover:text-sky-500 group-hover:translate-x-1 transition-all duration-300" />
+                <FaArrowRight className="flex-shrink-0 text-xs text-white/20 group-hover:text-sky-400 group-hover:translate-x-1 transition-all duration-300" />
               </motion.a>
             ))}
           </div>
@@ -205,7 +198,7 @@ export default function ContactPage({ locale = "zh" }) {
             whileInView="visible"
             viewport={{ once: true }}
             variants={fadeUp}
-            className="flex items-center justify-center gap-2 text-sm text-slate-400"
+            className="flex items-center justify-center gap-2 text-sm text-white/40"
           >
             <span className="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse" />
             {t.responseNote}

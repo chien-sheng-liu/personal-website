@@ -23,7 +23,10 @@
       "Bash(NODE_OPTIONS=\"--max-old-space-size=4096\" npx next build)",
       "Bash(NODE_OPTIONS=\"--max-old-space-size=4096\" npm run build)",
       "Bash(git:*)",
-      "Bash(NEXT_PUBLIC_BASE_PATH=/personal-website NODE_OPTIONS=\"--max-old-space-size=4096\" npm run build)"
+      "Bash(NEXT_PUBLIC_BASE_PATH=/personal-website NODE_OPTIONS=\"--max-old-space-size=4096\" npm run build)",
+      "WebFetch(domain:godly.website)",
+      "WebFetch(domain:daria-izbash.com)",
+      "WebFetch(domain:www.dariaizbash.com)"
     ]
   }
 }

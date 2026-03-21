@@ -16,7 +16,7 @@ export default function CtaSection({ title, description, buttonLabel, buttonHref
   return (
     <section className="relative px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
       {/* Subtle top divider */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-px bg-gradient-to-r from-transparent via-slate-300 to-transparent" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-px bg-gradient-to-r from-transparent via-white/15 to-transparent" />
 
       <div className="relative z-10 mx-auto max-w-2xl text-center">
         <motion.p
@@ -24,7 +24,7 @@ export default function CtaSection({ title, description, buttonLabel, buttonHref
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-          className="text-sm text-slate-400 mb-4"
+          className="text-sm text-white/40 mb-4"
         >
           {description}
         </motion.p>
